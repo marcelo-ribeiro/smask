@@ -1,0 +1,89 @@
+:root {
+  --color-primary-hue: 250;
+  --color-primary: hsl(var(--color-primary-hue), 80%, 50%);
+  --color-primary-hsl: var(--color-primary-hue), 80%, 50%;
+}
+
+::selection {
+  background-color: hsla(var(--color-primary-hsl), 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font: 16px/1.5 sans-serif;
+  cursor: default;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  padding: 1rem 2rem;
+  color: #000c;
+}
+body:not(.loaded) * {
+  transition: none !important;
+}
+
+img, svg {
+  display: block;
+  user-select: none;
+  pointer-events: none;
+  width: 100%;
+  height: auto;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.75rem;
+}
+
+/*CUSTOM INPUT*/
+.input--text {
+  --padding-horizontal: 0.75rem;
+  position: relative;
+}
+.input--text + .input--text {
+  margin-top: 1.5rem;
+}
+
+.input--text span {
+  position: absolute;
+  top: 0.75rem;
+  left: var(--padding-horizontal);
+  display: block;
+  line-height: calc(1em + 0.125rem);
+  color: #0008;
+}
+
+.input--text input {
+  appearance: none;
+  display: block;
+  padding: 2rem var(--padding-horizontal) 0.5rem;
+  font: inherit;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  box-shadow: #ddd 0 0 0 1px;
+  /*transition: 0.4s ease-out;*/
+  /*will-change: contents;*/
+}
+
+.input--text input:focus {
+  outline: none;
+  box-shadow: var(--color-primary) 0 0 3px 1px;
+}
+
+.input--text small {
+  display: block;
+  margin-top: 0.25rem;
+  padding: 0 var(--padding-horizontal);
+  font-size: 0.75rem;
+  color: #0008;
+}
+
+/*# sourceMappingURL=index.css.map */
