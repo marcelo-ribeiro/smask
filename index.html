@@ -5,37 +5,60 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Vanilla JS Masker</title>
+  <title>Vanilla JS Mask</title>
   <link rel="stylesheet" href="index.css">
 </head>
 <body onload="document.body.classList.add('loaded')">
 <header>
-  <h1>Vanilla JS Masker</h1>
+  <h1>Vanilla JS Mask</h1>
 </header>
+
 <main>
   <section>
     <header>
       <h3>Examples:</h3>
     </header>
-    <label class="input--text" for="cpf">
-      <span>CPF</span>
-      <input id="cpf" name="cpf" type="text" placeholder="Digite aqui..." value="12345678909" autofocus>
-    </label>
-    <label class="input--text" for="tel">
-      <span>Cell phone</span>
-      <input id="tel" name="tel" data-mask="(99) 99999-9999" type="tel" autocomplete="tel" value="71991284022">
-      <small>Using data-mask attribute</small>
-    </label>
-    <label class="input--text" for="date">
-      <span>Birthdate</span>
-      <input id="date" name="date" data-mask="99/99/9999" type="text" value="01011990">
-      <small>Using data-mask attribute</small>
-    </label>
-    <label class="input--text" for="placa">
-      <span>Placa Mercosul</span>
-      <input id="placa" name="placa" data-mask="ZZZ9Z99" type="text" value="BRA0S17">
-      <small>Using data-mask attribute</small>
-    </label>
+
+    <form action="#" onsubmit="return false">
+      <div class="input--text">
+        <label for="cpf">CPF</label>
+        <input id="cpf" name="cpf" type="text" placeholder="Digite aqui..." value="12345678909" autofocus required>
+      </div>
+
+      <div class="input--text">
+        <label for="tel">Cell phone</label>
+        <input id="tel" name="tel" type="tel" autocomplete="tel" placeholder="Digite aqui..." value="71987654321" data-mask="(99) 99999-9999"
+               required>
+        <!--<small>Using data-mask attribute</small>-->
+      </div>
+
+      <div class="input--text">
+        <label for="date">Birthdate</label>
+        <input id="date" name="date" type="text" placeholder="Digite aqui..." value="01011990" data-mask="99/99/9999" required>
+        <!--<small>Using data-mask attribute</small>-->
+      </div>
+
+      <div class="input--text">
+        <label for="placa">Placa Mercosul</label>
+        <input id="placa" name="placa" type="text" placeholder="Digite aqui..." value="BRA0S17" data-mask="ZZZ9Z99" required>
+        <!--<small>Using data-mask attribute</small>-->
+      </div>
+
+      <div class="input--text">
+        <label for="price">Price</label>
+        <input id="price" name="price" type="tel" placeholder="Digite aqui..." value="1234567" required>
+      </div>
+
+      <div class="input--text">
+        <label for="km">Km</label>
+        <input id="km" name="km" type="tel" placeholder="Digite aqui..." value="32850" data-mask="decimal" required>
+        <!--<small>Using data-mask attribute</small>-->
+      </div>
+
+      <p>
+        <button type="submit">Submit</button>
+      </p>
+    </form>
   </section>
 </main>
 

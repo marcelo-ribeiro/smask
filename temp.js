@@ -6,18 +6,20 @@ const DIGIT = "9",
  * @param {string} pattern=""
  */
 export const mask = (value = "", pattern = "") => {
-  value = value.substr(0, pattern.replace(/\W/ig, "").length);
-  for (let i = 0; i < value.length; i++) {
-    if (
+  for (let i = 0; i < pattern.length; i++) {
+    if (!value[i]) break;
+    else if (value[i] === pattern[i]) continue;
+    if (![DIGIT, ALPHA].includes(pattern[i]))
+      value = value.substr(0, i) + pattern[i] + value.substr(i, value.length);
+    else if (
       (pattern[i] === DIGIT && /\D/.test(value[i])) ||
       (pattern[i] === ALPHA && !/[a-z]/i.test(value[i]))
     ) {
       value = value.substr(0, i);
       break;
-    } else if (![DIGIT, ALPHA].includes(pattern[i]))
-      value = value.substr(0, i) + pattern[i] + value.substr(i, value.length);
+    }
   }
-  return value;
+  return value.substr(0, pattern.length);
 };
 
 /**
@@ -76,36 +78,36 @@ export const currency = (value, locale, defaults = {
 
 /**
  * @param {HTMLInputElement} element
+ * @param {string} pattern
+ */
+const setInputValue = (element, pattern) => {
+  switch (pattern) {
+    case "decimal":
+      element.value = decimal(unmaskNumber(element.value, pattern));
+      break;
+    case "currency":
+      element.value = currency(unmaskNumber(element.value, pattern));
+      break;
+    default:
+      const unmasked = unmask(element.value, pattern);
+      element.value = mask(element.value, pattern);
+  }
+};
+
+/**
+ * @param {HTMLInputElement} element
  * @param {string} pattern decimal|currency
  */
 export const maskInput = (element, pattern) => {
-  switch (pattern) {
-    case "decimal": {
-      const setValue = (element, pattern) =>
-        element.value = decimal(unmaskNumber(element.value, pattern))
-      element.value && setValue(element, pattern);
-      element.addEventListener("input", () => setValue(element, pattern));
-      break;
-    }
-    case "currency": {
-      const setValue = (element, pattern) =>
-        element.value = currency(unmaskNumber(element.value, pattern));
-      element.value && setValue(element, pattern);
-      element.addEventListener("input", () => setValue(element, pattern));
-      break;
-    }
-    default: {
-      pattern = pattern || element.dataset.mask;
-      if (!pattern) throw ReferenceError("Missing second parameter pattern.");
-      element.minLength = pattern.length;
-      element.maxLength = pattern.length;
-      element.pattern = `.{${pattern.length},${pattern.length}}`;
-      const setValue = (element, pattern) =>
-        element.value = mask(unmask(element.value, pattern), pattern);
-      element.value && setValue(element, pattern);
-      element.addEventListener("input", () => setValue(element, pattern));
-    }
+  if (!["decimal", "currency"].includes(pattern)) {
+    pattern = pattern || element.dataset.mask;
+    if (!pattern) throw ReferenceError("Missing second parameter pattern.");
+    element.minLength = pattern.length;
+    element.maxLength = pattern.length;
+    element.pattern = `.{${pattern.length},${pattern.length}}`
   }
+  element.value && setInputValue(element, pattern);
+  element.addEventListener("input", () => setInputValue(element, pattern));
 };
 
 /**
