@@ -1,8 +1,8 @@
 :root {
   --font-family: "DM Sans", "Inter", sans-serif;
   --color-primary-hue: 230;
-  --color-primary: hsl(var(--color-primary-hue), 100%, 50%);
-  --color-primary-hsl: var(--color-primary-hue), 100%, 50%;
+  --color-primary: hsl(var(--color-primary-hue), 100%, 75%);
+  --color-primary-hsl: var(--color-primary-hue), 100%, 75%;
   --text-color: #fffc;
   //--text-color: #000c;
   --background: hsl(var(--color-primary-hue), 20%, 10%);
@@ -21,7 +21,7 @@
 }
 
 html {
-  font: 18px/1.5 var(--font-family);
+  font: 16px/1.5 var(--font-family);
   cursor: default;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -85,7 +85,7 @@ button {
     left: 0;
     width: 100%;
     padding: 1.5rem 1.5rem;
-    background: #000a;
+    background: #0009;
     backdrop-filter: blur(6px);
   }
 }
@@ -107,15 +107,16 @@ button {
 // #CUSTOM INPUT
 // =============
 .input--text {
-  --padding-horizontal: 0.875rem;
+  --padding-horizontal: calc(1rem - 1px);
   --background: #fff1;
   //--background: #fff;
   --color: var(--text-color);
-  --border-color: #fff4;
-  --label-color: #fff8;
+  --border-color: #fff6;
+  --label-color: #fffc;
   --placeholder-color: #fff6;
   position: relative;
   width: 100%;
+  font-family: "Inter", sans-serif;
 
   & + .input--text {
     margin-top: 1.5rem;
@@ -124,26 +125,33 @@ button {
 .input--text label {
   position: absolute;
   top: 0.75rem;
-  left: calc(var(--padding-horizontal) + 2px);
+  left: calc(var(--padding-horizontal) + 1px);
   display: block;
+  font-family: inherit;
   font-size: 0.75rem;
   line-height: 1;
   color: var(--label-color);
+}
+input:not(:placeholder-shown):valid + label {
+  color: mediumseagreen;
+}
+input:not(:placeholder-shown):invalid + label {
+  color: tomato;
 }
 .input--text input {
   appearance: none;
   display: block;
   width: 100%;
-  padding: 1.75rem var(--padding-horizontal) 0.5rem;
-  font: inherit;
+  padding: 2rem var(--padding-horizontal) 0.675rem;
+  font-family: inherit;
   font-size: 1rem;
-  line-height: 1;
-  border: 2px solid var(--border-color);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   background: var(--background);
   color: var(--color);
   transition: 0.2s;
 
+  &:hover,
   &:focus {
     outline: none;
     border-color: var(--color-primary);
@@ -151,7 +159,7 @@ button {
   &:not(:placeholder-shown):valid {
     border-color: mediumseagreen;
   }
-  &:invalid {
+  &:not(:placeholder-shown):invalid {
     border-color: tomato;
   }
 
