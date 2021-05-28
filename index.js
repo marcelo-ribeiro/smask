@@ -8,8 +8,8 @@ const DIGIT = "9", ALPHA = "A", ALPHA_NUM = "Z";
 export const mask = (value, pattern) => {
   if (!value) return "";
   if (!pattern) throw new ReferenceError("");
-  const output = [...value.replace(/\W/g, "")],
-    alphaNumChars = [...pattern.replace(/\W/g, "")];
+  const alphaNumChars = [...unmask(pattern)],
+    output = [...unmask(value, pattern)];
   for (let i = 0; i < pattern.length && output[i]; i++)
     if (
       alphaNumChars[i] === DIGIT && /\D/.test(output[i]) ||
@@ -23,12 +23,13 @@ export const mask = (value, pattern) => {
 
 /**
  * @param {string} value
- * @param {string} pattern
+ * @param {string} [pattern=""]
  * @returns {string}
  */
 export const unmask = (value, pattern) => {
   if (!value) return "";
-  return value.replace(/\W/ig, "").substr(0, pattern.replace(/\W/ig, "").length);
+  value = value.replace(/\W/ig, "");
+  return pattern ? value.slice(0, pattern.replace(/\W/ig, "").length) : value;
 };
 
 /**
