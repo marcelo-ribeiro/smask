@@ -1,4 +1,4 @@
-const DIGIT = "0", ALPHA = "A", ALPHA_NUM = "Z";
+const DIGIT = "9", ALPHA = "A", ALPHA_NUM = "Z";
 
 /**
  * @param {string} value=""
