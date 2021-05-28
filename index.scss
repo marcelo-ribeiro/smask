@@ -1,10 +1,11 @@
 :root {
+  --font-family: "DM Sans", "Inter", sans-serif;
   --color-primary-hue: 230;
   --color-primary: hsl(var(--color-primary-hue), 100%, 50%);
   --color-primary-hsl: var(--color-primary-hue), 100%, 50%;
   --text-color: #fffc;
   //--text-color: #000c;
-  --background: hsl(var(--color-primary-hue), 20%, 5%);
+  --background: hsl(var(--color-primary-hue), 20%, 10%);
   //--background: hsl(var(--color-primary-hue), 20%, 97.5%);
   --button-background: mediumseagreen;
   --button-foreground: #000e;
@@ -16,27 +17,39 @@
 
 * {
   box-sizing: border-box;
-  line-height: calc(1em + 0.5rem);
+  line-height: calc(1em + 0.125rem);
 }
 
 html {
-  font: 20px/1.5 sans-serif;
+  font: 18px/1.5 var(--font-family);
   cursor: default;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+
+  @media (min-width: 490px) {
+    font-size: 20px;
+  }
 }
 
 body {
   margin: 0 auto;
   width: 100%;
   max-width: 35rem;
-  padding: 1.5rem 1.5rem 3rem;
+  padding: 1.5rem 1.5rem 6rem;
   color: var(--text-color);
   background: var(--background);
 
   &:not(.loaded) * {
     transition: none !important;
   }
+
+  @media (min-width: 490px) {
+    padding-bottom: 3rem;
+  }
+}
+
+header h1 {
+  color: mediumseagreen;
 }
 
 hr {
@@ -53,7 +66,7 @@ img, svg {
 }
 
 button {
-  padding: 0.5rem 1.5rem;
+  padding: 0.75rem 1.5rem;
   font: inherit;
   font-weight: 700;
   color: var(--button-foreground);
@@ -61,13 +74,29 @@ button {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  outline: none;
 }
 
 // CUSTOM
-form {
+.buttons {
+  @media (max-width: 489px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 1.5rem;
+    background: #0008;
+    backdrop-filter: blur(6px);
+  }
+}
+.grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  grid-gap: 1.5rem;
+
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
 
   .input--text {
     margin: 0 !important;
@@ -95,7 +124,7 @@ form {
 .input--text label {
   position: absolute;
   top: 0.75rem;
-  left: var(--padding-horizontal);
+  left: calc(var(--padding-horizontal) + 2px);
   display: block;
   font-size: 0.75rem;
   line-height: 1;
@@ -105,7 +134,7 @@ form {
   appearance: none;
   display: block;
   width: 100%;
-  padding: 1.875rem var(--padding-horizontal) 0.75rem;
+  padding: 1.75rem var(--padding-horizontal) 0.5rem;
   font: inherit;
   font-size: 1rem;
   line-height: 1;
