@@ -2,8 +2,10 @@
   --color-primary-hue: 230;
   --color-primary: hsl(var(--color-primary-hue), 100%, 50%);
   --color-primary-hsl: var(--color-primary-hue), 100%, 50%;
-  --text-color: #000c;
-  --background: hsl(var(--color-primary-hue), 20%, 97.5%);
+  --text-color: #fffc;
+  --background: hsl(var(--color-primary-hue), 20%, 5%);
+  --button-background: mediumseagreen;
+  --button-foreground: #000e;
 }
 
 ::selection {
@@ -12,10 +14,11 @@
 
 * {
   box-sizing: border-box;
+  line-height: calc(1em + 0.5rem);
 }
 
 html {
-  font: 18px/1.5 sans-serif;
+  font: 20px/1.5 sans-serif;
   cursor: default;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -25,12 +28,17 @@ body {
   margin: 0 auto;
   width: 100%;
   max-width: 35rem;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 3rem;
   color: var(--text-color);
   background: var(--background);
 }
 body:not(.loaded) * {
   transition: none !important;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #fff3;
 }
 
 img, svg {
@@ -41,16 +49,13 @@ img, svg {
   height: auto;
 }
 
-::placeholder {
-  color: #0006;
-  opacity: 1;
-}
-
 button {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.875rem;
   font: inherit;
-  background: #fff;
-  border: 1px solid #0004;
+  font-weight: 700;
+  color: var(--button-foreground);
+  background: var(--button-background);
+  border: none;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -65,8 +70,12 @@ form .input--text {
 }
 
 .input--text {
-  --padding-horizontal: 1rem;
-  --background: #fff;
+  --padding-horizontal: 0.875rem;
+  --background: #fff1;
+  --color: var(--text-color);
+  --border-color: #fff4;
+  --label-color: #fff8;
+  --placeholder-color: #fff6;
   position: relative;
   width: 100%;
 }
@@ -81,7 +90,7 @@ form .input--text {
   display: block;
   font-size: 0.75rem;
   line-height: 1;
-  color: #0008;
+  color: var(--label-color);
 }
 
 .input--text input {
@@ -92,23 +101,25 @@ form .input--text {
   font: inherit;
   font-size: 1rem;
   line-height: 1;
-  border: none;
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   background: var(--background);
-  box-shadow: #0004 0 0 0 1px;
+  color: var(--color);
+  transition: 0.2s;
 }
-
 .input--text input:focus {
   outline: none;
-  box-shadow: var(--color-primary) 0 0 0 2px;
+  border-color: var(--color-primary);
 }
-
-.input--text input:valid {
-  box-shadow: mediumseagreen 0 0 0 2px;
+.input--text input:not(:placeholder-shown):valid {
+  border-color: mediumseagreen;
 }
-
 .input--text input:invalid {
-  box-shadow: tomato 0 0 0 2px;
+  border-color: tomato;
+}
+.input--text input::placeholder {
+  opacity: 1;
+  color: var(--placeholder-color);
 }
 
 .input--text small {

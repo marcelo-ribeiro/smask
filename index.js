@@ -1,30 +1,33 @@
-const DIGIT = "9",
-  ALPHA = "Z";
+const DIGIT = "9", ALPHA = "A", ALPHA_NUM = "Z";
 
 /**
  * @param {string} value=""
  * @param {string} pattern=""
+ * @returns {string}
  */
-export const mask = (value = "", pattern = "") => {
-  value = value.substr(0, pattern.replace(/\W/ig, "").length);
-  for (let i = 0; i < value.length; i++) {
+export const mask = (value, pattern) => {
+  if (!value) return "";
+  if (!pattern) throw new ReferenceError("");
+  const output = [...value.replace(/\W/g, "")],
+    alphaNumChars = [...pattern.replace(/\W/g, "")];
+  for (let i = 0; i < pattern.length && output[i]; i++)
     if (
-      (pattern[i] === DIGIT && /\D/.test(value[i])) ||
-      (pattern[i] === ALPHA && !/[a-z]/i.test(value[i]))
-    ) {
-      value = value.substr(0, i);
-      break;
-    } else if (![DIGIT, ALPHA].includes(pattern[i]))
-      value = value.substr(0, i) + pattern[i] + value.substr(i, value.length);
-  }
-  return value;
+      alphaNumChars[i] === DIGIT && /\D/.test(output[i]) ||
+      alphaNumChars[i] === ALPHA && !/[a-z]/i.test(output[i]) ||
+      alphaNumChars[i] === ALPHA_NUM && /\W/i.test(output[i])
+    ) output.splice(i, 1);
+    else if (/\W/g.test(pattern[i]))
+      output.splice(i, 0, pattern[i]) && alphaNumChars.splice(i, 0, pattern[i]);
+  return output.join("");
 };
 
 /**
- * @param {string} value=""
- * @param {string} pattern=""
+ * @param {string} value
+ * @param {string} pattern
+ * @returns {string}
  */
-export const unmask = (value = "", pattern = "") => {
+export const unmask = (value, pattern) => {
+  if (!value) return "";
   return value.replace(/\W/ig, "").substr(0, pattern.replace(/\W/ig, "").length);
 };
 
@@ -32,32 +35,30 @@ export const unmask = (value = "", pattern = "") => {
  * @param {string} value
  * @param {string} [locale="pt-br"]
  * @param {object} [defaults]
- * @param {string} defaults.style="decimal"
+ * @param {string} defaults.style="decimal" decimal|currency|percent|unit
+ * @returns {string}
  */
-export const decimal = (value, locale = "pt-br", defaults = {
-  style: "decimal", // decimal | currency | percent | unit
-}) => {
-  if (typeof value === "undefined" || value === "") return "";
-  return new Intl.NumberFormat(locale, defaults).format(parseFloat(value));
+export const decimal = (value, locale = "pt-br", {style = "decimal", ...options} = {}) => {
+  if (!value) return "";
+  return new Intl.NumberFormat(locale, {style, ...options}).format(parseFloat(value));
 };
 
 /**
  * @param {string} value
  * @param {string} pattern
+ * @returns {string}
  */
 export const unmaskNumber = (value, pattern) => {
-  if (!value || !pattern) return value;
-  value = value.replace(/\D/g, "");
-  if (pattern === "decimal") return value;
-  else if (pattern === "currency") {
-    if (value === "00") return "";
-    else if (value === "0000") return 0;
-    const aux = [...value];
-    if (value > 0 && value < 10) aux.unshift("0");
-    if (value > 0) aux.splice(aux.length - 2, 0, ".");
-    value = aux.join("");
-    return value;
+  if (!value || !pattern) return value
+  let output = value.replace(/\D/g, "")
+  if (pattern === "currency" && output > 0) {
+    let output = parseFloat(value.replace(/\D/g, ""))
+    output = [...output.toString()]
+    if (output.length === 1) output.unshift("0")
+    output.splice(-2, 0, ".")
+    return output.join("")
   }
+  return output;
 }
 
 /**
@@ -71,8 +72,8 @@ export const currency = (value, locale, defaults = {
   style: "currency",
   currency: "BRL"
 }) => {
-  return decimal(value, locale, defaults);
-};
+  return decimal(value, locale, defaults)
+}
 
 /**
  * @param {HTMLInputElement} element
@@ -91,7 +92,7 @@ export const maskInput = (element, pattern) => {
       const setValue = (element, pattern) =>
         element.value = currency(unmaskNumber(element.value, pattern));
       element.value && setValue(element, pattern);
-      element.addEventListener("input", () => setValue(element, pattern));
+      element.addEventListener("input", (e) => setValue(element, pattern));
       break;
     }
     default: {
@@ -101,7 +102,7 @@ export const maskInput = (element, pattern) => {
       element.maxLength = pattern.length;
       element.pattern = `.{${pattern.length},${pattern.length}}`;
       const setValue = (element, pattern) =>
-        element.value = mask(unmask(element.value, pattern), pattern);
+        element.value = mask(element.value, pattern);
       element.value && setValue(element, pattern);
       element.addEventListener("input", () => setValue(element, pattern));
     }

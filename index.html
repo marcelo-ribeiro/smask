@@ -10,7 +10,9 @@
 </head>
 <body onload="document.body.classList.add('loaded')">
 <header>
-  <h1>Vanilla JS Mask</h1>
+  <h1>smask_</h1>
+  <h2>Vanilla JS Mask</h2>
+  <hr>
 </header>
 
 <main>
@@ -27,37 +29,41 @@
 
       <div class="input--text">
         <label for="tel">Cell phone</label>
-        <input id="tel" name="tel" type="tel" autocomplete="tel" placeholder="Digite aqui..." value="71987654321" data-mask="(99) 99999-9999"
-               required>
-        <!--<small>Using data-mask attribute</small>-->
+        <input id="tel" name="tel" type="tel" autocomplete="tel" placeholder="Digite aqui..." value="71987654321"
+               data-mask="(99) 99999-9999" required>
       </div>
 
       <div class="input--text">
         <label for="date">Birthdate</label>
-        <input id="date" name="date" type="text" placeholder="Digite aqui..." value="01011990" data-mask="99/99/9999" required>
-        <!--<small>Using data-mask attribute</small>-->
+        <input id="date" name="date" type="text" placeholder="Digite aqui..." value="01011990" data-mask="99/99/9999"
+               required>
       </div>
 
       <div class="input--text">
         <label for="placa">Placa Mercosul</label>
-        <input id="placa" name="placa" type="text" placeholder="Digite aqui..." value="BRA0S17" data-mask="ZZZ9Z99" required>
-        <!--<small>Using data-mask attribute</small>-->
+        <input id="placa" name="placa" type="text" placeholder="Digite aqui..." value="BRA0S17" data-mask="ZZZ9Z99"
+               required>
       </div>
 
       <div class="input--text">
         <label for="price">Price</label>
-        <input id="price" name="price" type="tel" placeholder="Digite aqui..." value="1234567" required>
+        <input id="price" name="price" type="tel" placeholder="Digite aqui..." value="0" required>
       </div>
 
       <div class="input--text">
-        <label for="km">Km</label>
-        <input id="km" name="km" type="tel" placeholder="Digite aqui..." value="32850" data-mask="decimal" required>
-        <!--<small>Using data-mask attribute</small>-->
+        <label for="quantity">Quantity</label>
+        <input id="quantity" name="quantity" type="tel" placeholder="Digite aqui..." value="1000" data-mask="decimal"
+               required>
       </div>
 
-      <p>
+      <div class="input--text">
+        <label for="custom">Alphanumeric</label>
+        <input id="custom" name="custom" type="text" placeholder="Digite aqui..." value="2B7" data-mask="ZZZ" required>
+      </div>
+
+      <div style="grid-column: 1/2">
         <button type="submit">Submit</button>
-      </p>
+      </div>
     </form>
   </section>
 </main>
