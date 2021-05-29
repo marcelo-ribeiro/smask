@@ -1,4 +1,4 @@
-import {currency, decimal, mask, maskInput, unmask} from "../lib";
+import {currency, decimal, mask, maskInput, unmask} from "smask.js";
 
 const cpf = mask("12345678909", "ddd.ddd.ddd-dd");
 console.log("CPF: ", cpf);
