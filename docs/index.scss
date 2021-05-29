@@ -78,6 +78,10 @@ button {
 }
 
 // CUSTOM
+header h1 {
+  font-size: 2.5rem;
+}
+
 .buttons {
   @media (max-width: 489px) {
     position: fixed;
