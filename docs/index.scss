@@ -93,6 +93,7 @@ header h1 {
     backdrop-filter: blur(6px);
   }
 }
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
@@ -129,11 +130,12 @@ header h1 {
 .input--text label {
   position: absolute;
   top: 0.75rem;
-  left: calc(var(--padding-horizontal) + 1px);
+  left: 0;
   display: block;
+  width: 100%;
+  padding: 0 var(--padding-horizontal);
   font-family: inherit;
   font-size: 0.75rem;
-  line-height: 1;
   color: var(--label-color);
 }
 input:not(:placeholder-shown):valid + label {
