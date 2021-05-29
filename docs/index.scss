@@ -34,6 +34,7 @@ html {
 body {
   margin: 0 auto;
   width: 100%;
+  height: 100vh;
   max-width: 32rem;
   padding: 1.5rem 1.5rem 6rem;
   color: var(--text-color);
@@ -156,6 +157,7 @@ input:not(:placeholder-shown):invalid + label {
   background: var(--background);
   color: var(--color);
   transition: 0.2s;
+  line-height: 1;
 
   &:hover,
   &:focus {
