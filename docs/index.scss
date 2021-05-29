@@ -157,7 +157,6 @@ input:not(:placeholder-shown):invalid + label {
   background: var(--background);
   color: var(--color);
   transition: 0.2s;
-  line-height: 1;
 
   &:hover,
   &:focus {
