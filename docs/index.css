@@ -49,8 +49,8 @@ body:not(.loaded) * {
 }
 
 h1, h2, h3, h4, h5, h6, p {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 hr {
@@ -78,17 +78,25 @@ button {
   outline: none;
 }
 
-header h1 {
+.app-header {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid #fff3;
+}
+.app-header h1 {
   font-size: 2.5rem;
   color: mediumseagreen;
 }
 
+.buttons {
+  margin-top: 3rem;
+}
 @media (max-width: 489px) {
   .buttons {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
+    margin-top: 0;
     padding: 1.5rem 1.5rem;
     background: #0009;
     backdrop-filter: blur(6px);
@@ -101,15 +109,15 @@ header h1 {
   grid-gap: 1.5rem;
 }
 .grid:not(:last-child) {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 .grid .input--text {
   margin: 0 !important;
 }
 
-.input--text {
+.field--text {
   --padding-horizontal: calc(1rem - 1px);
-  --background: #fff1;
+  --background: hsl(var(--color-primary-hue), 20%, 15%);
   --color: var(--text-color);
   --border-color: #fff6;
   --label-color: #fffc;
@@ -118,13 +126,10 @@ header h1 {
   width: 100%;
   font-family: "Inter", sans-serif;
 }
-.input--text + .input--text {
-  margin-top: 1.5rem;
-}
 
-.input--text label {
+.field--text__label {
   position: absolute;
-  top: 0.875rem;
+  top: 0.75rem;
   left: 0;
   display: block;
   width: 100%;
@@ -133,41 +138,44 @@ header h1 {
   font-size: 0.75rem;
   color: var(--label-color);
 }
-
-input:not(:placeholder-shown):valid + label {
+input:not(:placeholder-shown):valid + .field--text__label {
   color: mediumseagreen;
 }
-
-input:not(:placeholder-shown):invalid + label {
+input:not(:placeholder-shown):invalid + .field--text__label {
   color: tomato;
 }
 
-.input--text input {
+.field--text__input {
   appearance: none;
   display: block;
   width: 100%;
-  padding: 2rem var(--padding-horizontal) 0.675rem;
+  height: 4rem;
+  padding: 2rem var(--padding-horizontal) 0.75rem;
   font-family: inherit;
   font-size: 1rem;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   background: var(--background);
   color: var(--color);
-  transition: 0.2s;
+  transition: border-color 0.15s;
 }
-.input--text input:hover, .input--text input:focus {
+.field--text__input:hover, .field--text__input:focus {
   outline: none;
   border-color: var(--color-primary);
 }
-.input--text input:not(:placeholder-shown):valid {
+.field--text__input:not(:placeholder-shown):valid {
   border-color: mediumseagreen;
 }
-.input--text input:not(:placeholder-shown):invalid {
+.field--text__input:not(:placeholder-shown):invalid {
   border-color: tomato;
 }
-.input--text input::placeholder {
+.field--text__input::placeholder {
   opacity: 1;
   color: var(--placeholder-color);
+}
+.field--text__input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 50px var(--background) inset;
+  -webkit-text-fill-color: var(--text-color);
 }
 
 .input--text small {

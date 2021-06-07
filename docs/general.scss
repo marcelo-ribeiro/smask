@@ -1,14 +1,22 @@
-header h1 {
-  font-size: 2.5rem;
-  color: mediumseagreen;
+.app-header {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid #fff3;
+
+  h1 {
+    font-size: 2.5rem;
+    color: mediumseagreen;
+  }
 }
 
 .buttons {
+  margin-top: 3rem;
+
   @media (max-width: 489px) {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
+    margin-top: 0;
     padding: 1.5rem 1.5rem;
     background: #0009;
     backdrop-filter: blur(6px);
@@ -21,21 +29,19 @@ header h1 {
   grid-gap: 1.5rem;
 
   &:not(:last-child) {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
-
   .input--text {
     margin: 0 !important;
   }
 }
 
 // =============
-// #CUSTOM INPUT
+// #CUSTOM FIELD
 // =============
-.input--text {
+.field--text {
   --padding-horizontal: calc(1rem - 1px);
-  --background: #fff1;
-  //--background: #fff;
+  --background: hsl(var(--color-primary-hue), 20%, 15%);
   --color: var(--text-color);
   --border-color: #fff6;
   --label-color: #fffc;
@@ -43,14 +49,11 @@ header h1 {
   position: relative;
   width: 100%;
   font-family: "Inter", sans-serif;
-
-  & + .input--text {
-    margin-top: 1.5rem;
-  }
 }
-.input--text label {
+
+.field--text__label {
   position: absolute;
-  top: 0.875rem;
+  top: 0.75rem;
   left: 0;
   display: block;
   width: 100%;
@@ -58,25 +61,28 @@ header h1 {
   font-family: inherit;
   font-size: 0.75rem;
   color: var(--label-color);
+
+  input:not(:placeholder-shown):valid + & {
+    color: mediumseagreen;
+  }
+  input:not(:placeholder-shown):invalid + & {
+    color: tomato;
+  }
 }
-input:not(:placeholder-shown):valid + label {
-  color: mediumseagreen;
-}
-input:not(:placeholder-shown):invalid + label {
-  color: tomato;
-}
-.input--text input {
+
+.field--text__input {
   appearance: none;
   display: block;
   width: 100%;
-  padding: 2rem var(--padding-horizontal) 0.675rem;
+  height: 4rem;
+  padding: 2rem var(--padding-horizontal) 0.75rem;
   font-family: inherit;
   font-size: 1rem;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   background: var(--background);
   color: var(--color);
-  transition: 0.2s;
+  transition: border-color 0.15s;
 
   &:hover,
   &:focus {
@@ -89,10 +95,13 @@ input:not(:placeholder-shown):invalid + label {
   &:not(:placeholder-shown):invalid {
     border-color: tomato;
   }
-
   &::placeholder {
     opacity: 1;
     color: var(--placeholder-color);
+  }
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 50px var(--background) inset;
+    -webkit-text-fill-color: var(--text-color);
   }
 }
 
