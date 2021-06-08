@@ -80,11 +80,14 @@ button {
 
 .app-header {
   margin-bottom: 3rem;
-  border-bottom: 1px solid #fff3;
+  border-bottom: 1px solid #fff2;
 }
 .app-header h1 {
   font-size: 2.5rem;
   color: mediumseagreen;
+}
+.app-header h2 {
+  font-weight: 300;
 }
 
 .buttons {
