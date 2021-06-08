@@ -42,11 +42,6 @@ body {
 body:not(.loaded) * {
   transition: none !important;
 }
-@media (min-width: 490px) {
-  body {
-    padding-bottom: 3rem;
-  }
-}
 
 h1, h2, h3, h4, h5, h6, p {
   margin-top: 1.5rem;
@@ -117,7 +112,7 @@ button {
     left: 0;
     width: 100%;
     margin-top: 0;
-    padding: 1.5rem 1.5rem;
+    padding: 1.5rem;
     background: #0009;
     backdrop-filter: blur(6px);
   }
@@ -139,7 +134,7 @@ button {
   --padding-horizontal: calc(1rem - 1px);
   --background: hsl(var(--color-primary-hue), 20%, 15%);
   --color: var(--text-color);
-  --border-color: #fff6;
+  --border-color: #fff4;
   --label-color: #fffc;
   --placeholder-color: #fff6;
   position: relative;

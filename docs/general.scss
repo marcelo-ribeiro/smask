@@ -38,7 +38,7 @@
     left: 0;
     width: 100%;
     margin-top: 0;
-    padding: 1.5rem 1.5rem;
+    padding: 1.5rem;
     background: #0009;
     backdrop-filter: blur(6px);
   }
@@ -64,7 +64,7 @@
   --padding-horizontal: calc(1rem - 1px);
   --background: hsl(var(--color-primary-hue), 20%, 15%);
   --color: var(--text-color);
-  --border-color: #fff6;
+  --border-color: #fff4;
   --label-color: #fffc;
   --placeholder-color: #fff6;
   position: relative;
