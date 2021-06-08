@@ -42,8 +42,7 @@ export const unmask = (value, pattern) => {
  */
 export const decimal = (value, pattern = "decimal", locale = "pt-br", {style = "decimal", ...options} = {}) => {
   if (typeof value === "undefined" || value === "") return ""
-  unmaskNumber(value, pattern)
-  return new Intl.NumberFormat(locale, {style, ...options}).format(parseFloat(value))
+  return new Intl.NumberFormat(locale, {style, ...options}).format(unmaskNumber(value, pattern))
 }
 
 /**
@@ -65,20 +64,23 @@ export const currency = (value, pattern, locale, defaults = {
 /**
  * @param {string} value
  * @param {string} pattern
- * @returns {string}
+ * @returns {string|int}
  */
 export const unmaskNumber = (value, pattern) => {
   if (!value || !pattern) return value
   let output = value.replace(/\D/g, "")
   if (pattern === "currency" && output > 0) {
-    let output = parseFloat(value.replace(/\D/g, ""))
-    output = [...output.toString()]
-    if (output.length === 1) output.unshift("0")
+    output = [...output]
+    output.length === 1 && output.unshift("0")
     output.splice(-2, 0, ".")
-    return output.join("")
+    output = output.join("")
   }
-  return output
+  return parseFloat(output)
 }
+
+// const setInputValue = callback => {
+//
+// }
 
 /**
  * @param {HTMLInputElement} element
@@ -87,15 +89,13 @@ export const unmaskNumber = (value, pattern) => {
 export const maskInput = (element, pattern) => {
   switch (pattern) {
     case "decimal": {
-      const setValue = (element, pattern) =>
-        element.value = decimal(element.value, pattern)
+      const setValue = (element, pattern) => element.value = decimal(element.value, pattern)
       element.value && setValue(element, pattern)
       element.addEventListener("input", () => setValue(element, pattern))
       break
     }
     case "currency": {
-      const setValue = (element, pattern) =>
-        element.value = currency(element.value, pattern)
+      const setValue = (element, pattern) => element.value = currency(element.value, pattern)
       element.value && setValue(element, pattern)
       element.addEventListener("input", (e) => setValue(element, pattern))
       break
@@ -103,11 +103,9 @@ export const maskInput = (element, pattern) => {
     default: {
       pattern = pattern || element.dataset.mask
       if (!pattern) throw ReferenceError("Missing second parameter pattern.")
-      element.minLength = pattern.length
-      element.maxLength = pattern.length
+      element.minLength = element.maxLength = pattern.length
       element.pattern = `.{${pattern.length},${pattern.length}}`
-      const setValue = (element, pattern) =>
-        element.value = mask(element.value, pattern)
+      const setValue = (element, pattern) => element.value = mask(element.value, pattern)
       element.value && setValue(element, pattern)
       element.addEventListener("input", () => setValue(element, pattern))
     }
