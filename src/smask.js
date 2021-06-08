@@ -27,7 +27,7 @@ export const mask = (value, pattern) => {
  * @returns {string}
  */
 export const unmask = (value, pattern) => {
-  if (!value) return ""
+  if (!value) return value
   value = value.replace(/\W/ig, "")
   return pattern ? value.slice(0, pattern.replace(/\W/ig, "").length) : value
 }
@@ -41,7 +41,7 @@ export const unmask = (value, pattern) => {
  * @returns {string}
  */
 export const decimal = (value, pattern = "decimal", locale = "pt-br", {style = "decimal", ...options} = {}) => {
-  if (typeof value === "undefined" || value === "") return ""
+  if (!value) return value
   return new Intl.NumberFormat(locale, {style, ...options}).format(unmaskNumber(value, pattern))
 }
 
@@ -78,38 +78,35 @@ export const unmaskNumber = (value, pattern) => {
   return parseFloat(output)
 }
 
-// const setInputValue = callback => {
-//
-// }
+/**
+ * @param {string} funcName
+ * @param {HTMLInputElement} element
+ * @param {string} pattern
+ */
+const setInputValue = (funcName, element, pattern) =>
+  element.value = eval(funcName)(element.value, pattern)
 
 /**
  * @param {HTMLInputElement} element
  * @param {string} pattern decimal|currency
  */
 export const maskInput = (element, pattern) => {
+  let listener;
   switch (pattern) {
-    case "decimal": {
-      const setValue = (element, pattern) => element.value = decimal(element.value, pattern)
-      element.value && setValue(element, pattern)
-      element.addEventListener("input", () => setValue(element, pattern))
+    case "decimal":
+    case "currency":
+      element.value && setInputValue(pattern, element, pattern)
+      listener = () => setInputValue(pattern, element, pattern)
       break
-    }
-    case "currency": {
-      const setValue = (element, pattern) => element.value = currency(element.value, pattern)
-      element.value && setValue(element, pattern)
-      element.addEventListener("input", (e) => setValue(element, pattern))
-      break
-    }
-    default: {
+    default:
       pattern = pattern || element.dataset.mask
       if (!pattern) throw ReferenceError("Missing second parameter pattern.")
       element.minLength = element.maxLength = pattern.length
       element.pattern = `.{${pattern.length},${pattern.length}}`
-      const setValue = (element, pattern) => element.value = mask(element.value, pattern)
-      element.value && setValue(element, pattern)
-      element.addEventListener("input", () => setValue(element, pattern))
-    }
+      element.value && setInputValue("mask", element, pattern)
+      listener = () => setInputValue("mask", element, pattern)
   }
+  element.addEventListener("input", listener)
 }
 
 /**
