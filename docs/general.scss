@@ -1,13 +1,31 @@
+@keyframes keyboard {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .app-header {
   margin-bottom: 3rem;
   border-bottom: 1px solid #fff2;
 
   h1 {
     font-size: 2.5rem;
+    font-weight: 700;
     color: mediumseagreen;
+
+    span {
+      animation-name: keyboard;
+      animation-duration: .5s;
+      animation-direction: alternate;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
   }
   h2 {
-    font-weight: 300;
+    font-style: italic;
   }
 }
 
