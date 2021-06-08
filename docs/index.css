@@ -91,7 +91,8 @@ button {
   font-weight: 700;
   color: mediumseagreen;
 }
-.app-header h1 span {
+.app-header h1:after {
+  content: "|";
   margin-left: 0.05em;
   font-weight: 400;
   will-change: opacity;
@@ -116,7 +117,7 @@ button {
     width: 100%;
     margin-top: 0;
     padding: 1.5rem;
-    background: #0009;
+    background: #0006;
     backdrop-filter: blur(6px);
   }
 }

@@ -91,22 +91,17 @@ const setInputValue = (funcName, element, pattern) =>
  * @param {string} pattern decimal|currency
  */
 export const maskInput = (element, pattern) => {
-  let listener;
-  switch (pattern) {
-    case "decimal":
-    case "currency":
-      element.value && setInputValue(pattern, element, pattern)
-      listener = () => setInputValue(pattern, element, pattern)
-      break
-    default:
-      pattern = pattern || element.dataset.mask
-      if (!pattern) throw ReferenceError("Missing second parameter pattern.")
-      element.minLength = element.maxLength = pattern.length
-      element.pattern = `.{${pattern.length},${pattern.length}}`
-      element.value && setInputValue("mask", element, pattern)
-      listener = () => setInputValue("mask", element, pattern)
+  pattern = pattern || element.dataset.mask
+  if (!pattern) throw ReferenceError("Missing second parameter pattern.")
+  let type = pattern;
+  if (!["decimal", "currency"].includes(pattern)) {
+    element.minLength = element.maxLength = pattern.length
+    element.pattern = `.{${pattern.length},${pattern.length}}`
+    type = "mask"
   }
+  const listener = () => setInputValue(type, element, pattern)
   element.addEventListener("input", listener)
+  element.value && listener()
 }
 
 /**
