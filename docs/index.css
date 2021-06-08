@@ -92,7 +92,7 @@ button {
   color: mediumseagreen;
 }
 .app-header h1 span {
-  margin-left: 0.1em;
+  margin-left: 0.05em;
   font-weight: 400;
   will-change: opacity;
   animation-name: keyboard;
