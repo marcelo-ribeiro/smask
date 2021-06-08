@@ -9,7 +9,8 @@
   <link rel="stylesheet" href="index.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <!--<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">-->
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
 
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
@@ -32,34 +33,46 @@
     <form onsubmit="return false">
       <div class="grid">
         <div class="field--text">
-          <input class="field--text__input" id="cpf" name="cpf" type="tel" inputmode="numeric" placeholder="000.000.000-00" autofocus required>
+          <input class="field--text__input" id="cpf" name="cpf" type="tel" inputmode="numeric"
+                 placeholder="000.000.000-00" autofocus required>
           <label class="field--text__label" for="cpf">Brazil CPF</label>
         </div>
 
         <div class="field--text">
-          <input class="field--text__input" id="tel" name="tel" type="tel" inputmode="numeric" autocomplete="tel" placeholder="(00) 00000-0000"
+          <input class="field--text__input" id="cnpj" name="cnpj" type="tel" inputmode="numeric" autocomplete="off"
+                 placeholder="00.000.000/0000-00" data-mask="dd.ddd.ddd/dddd-dd" required>
+          <label class="field--text__label" for="cnpj">Brazil CNPJ</label>
+        </div>
+
+        <div class="field--text">
+          <input class="field--text__input" id="tel" name="tel" type="tel" inputmode="numeric" autocomplete="tel"
+                 placeholder="(00) 00000-0000"
                  data-mask="(dd) ddddd-dddd" required>
           <label class="field--text__label" for="tel">Cell Phone</label>
         </div>
 
         <div class="field--text">
-          <input class="field--text__input" id="date" name="date" type="tel" inputmode="numeric" placeholder="00/00/0000" data-mask="dd/dd/dddd"
+          <input class="field--text__input" id="date" name="date" type="tel" inputmode="numeric"
+                 placeholder="00/00/0000" data-mask="dd/dd/dddd"
                  required>
           <label class="field--text__label" for="date">Birthdate</label>
         </div>
 
         <div class="field--text">
-          <input class="field--text__input" id="car-plate" name="car-plate" type="text" placeholder="AAA0A00" data-mask="aaadadd" required>
+          <input class="field--text__input" id="car-plate" name="car-plate" type="text" placeholder="AAA0A00"
+                 data-mask="aaadadd" required>
           <label class="field--text__label" for="car-plate">Br Car Plate</label>
         </div>
 
         <div class="field--text">
-          <input class="field--text__input" id="price" name="price" type="tel" inputmode="numeric" placeholder="0,00" required>
+          <input class="field--text__input" id="price" name="price" type="tel" inputmode="numeric" placeholder="0,00"
+                 required>
           <label class="field--text__label" for="price">Price</label>
         </div>
 
         <div class="field--text">
-          <input class="field--text__input" id="quantity" name="quantity" type="tel" inputmode="numeric" placeholder="0" data-mask="decimal"
+          <input class="field--text__input" id="quantity" name="quantity" type="tel" inputmode="numeric" placeholder="0"
+                 data-mask="decimal"
                  required>
           <label class="field--text__label" for="quantity">Quantity</label>
         </div>
