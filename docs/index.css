@@ -38,6 +38,7 @@ body {
   padding: 1.5rem 1.5rem 6rem;
   color: var(--text-color);
   background: var(--background);
+  user-select: none;
 }
 body:not(.loaded) * {
   transition: none !important;
@@ -156,6 +157,7 @@ button {
   font-family: inherit;
   font-size: 0.75rem;
   color: var(--label-color);
+  pointer-events: none;
 }
 input:not(:placeholder-shown):valid + .field--text__label {
   color: mediumseagreen;

@@ -87,6 +87,7 @@
   font-family: inherit;
   font-size: 0.75rem;
   color: var(--label-color);
+  pointer-events: none;
 
   input:not(:placeholder-shown):valid + & {
     color: mediumseagreen;

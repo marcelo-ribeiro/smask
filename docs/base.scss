@@ -37,6 +37,7 @@ body {
   padding: 1.5rem 1.5rem 6rem;
   color: var(--text-color);
   background: var(--background);
+  user-select: none;
 
   &:not(.loaded) * {
     transition: none !important;

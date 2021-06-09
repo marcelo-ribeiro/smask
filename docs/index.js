@@ -21,4 +21,4 @@ maskInput(document.getElementById("cpf"), "ddd.ddd.ddd-dd");
 maskInput(document.getElementById("price"), "currency");
 
 // Setting price placeholder
-document.getElementById("price").setAttribute("placeholder", currency(0, "pt-BR"));
+document.getElementById("price").setAttribute("placeholder", currency("0", "pt-BR"));

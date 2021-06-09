@@ -47,14 +47,13 @@ export const decimal = (value, pattern = "decimal", locale = "pt-br", {style = "
 
 /**
  * @param {string|int} value
- * @param {string} pattern
  * @param {string} [locale]
  * @param {object} [defaults]
  * @param {string} defaults.style="currency"
  * @param {string} defaults.currency="BRL"
  * @returns {string}
  */
-export const currency = (value, pattern, locale, defaults = {
+export const currency = (value, locale, defaults = {
   style: "currency",
   currency: "BRL"
 }) => {
@@ -88,16 +87,16 @@ const setInputValue = (funcName, element, pattern) =>
 
 /**
  * @param {HTMLInputElement} element
- * @param {string} pattern decimal|currency|custom
+ * @param {string} pattern decimal|currency
  */
 export const maskInput = (element, pattern) => {
   pattern = pattern || element.dataset.mask
   if (!pattern) throw ReferenceError("Missing second parameter pattern.")
   let type = pattern;
   if (!["decimal", "currency"].includes(pattern)) {
-      element.minLength = element.maxLength = pattern.length
-      element.pattern = `.{${pattern.length},${pattern.length}}`
-      type = "mask"
+    element.minLength = element.maxLength = pattern.length
+    element.pattern = `.{${pattern.length},${pattern.length}}`
+    type = "mask"
   }
   const listener = () => setInputValue(type, element, pattern)
   element.addEventListener("input", listener)

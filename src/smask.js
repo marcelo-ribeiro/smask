@@ -47,14 +47,13 @@ export const decimal = (value, pattern = "decimal", locale = "pt-br", {style = "
 
 /**
  * @param {string|int} value
- * @param {string} pattern
  * @param {string} [locale]
  * @param {object} [defaults]
  * @param {string} defaults.style="currency"
  * @param {string} defaults.currency="BRL"
  * @returns {string}
  */
-export const currency = (value, pattern, locale, defaults = {
+export const currency = (value, locale, defaults = {
   style: "currency",
   currency: "BRL"
 }) => {
