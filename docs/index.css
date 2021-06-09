@@ -117,8 +117,8 @@ button {
     width: 100%;
     margin-top: 0;
     padding: 1rem 1.5rem;
-    border-top: 1px solid #fff2;
-    backdrop-filter: blur(6px);
+    border-top: 1px solid #fff1;
+    background: var(--background);
   }
 }
 
