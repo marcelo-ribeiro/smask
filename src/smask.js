@@ -8,16 +8,18 @@ const DIGIT = "d", ALPHA = "a", ALPHA_NUM = "w"
 export const mask = (value, pattern) => {
   if (!value) return ""
   if (!pattern) throw new ReferenceError("")
-  const alphaNumChars = [...unmask(pattern)],
+  const patternUnmasked = [...unmask(pattern)],
     output = [...unmask(value, pattern)]
   for (let i = 0; i < pattern.length && output[i]; i++)
+    // remove o caracter digitado caso nao seja o esperado
     if (
-      (alphaNumChars[i] === DIGIT && /\D/.test(output[i])) ||
-      (alphaNumChars[i] === ALPHA && !/[a-z]/i.test(output[i])) ||
-      (alphaNumChars[i] === ALPHA_NUM && /\W/i.test(output[i]))
+      (patternUnmasked[i] === DIGIT && /\D/.test(output[i])) ||
+      (patternUnmasked[i] === ALPHA && !/[a-z]/i.test(output[i])) ||
+      (patternUnmasked[i] === ALPHA_NUM && /\W/i.test(output[i]))
     ) output.splice(i, 1)
-    else if (/\W/g.test(pattern[i]))
-      output.splice(i, 0, pattern[i]) && alphaNumChars.splice(i, 0, pattern[i])
+    // testa se o caracter esperado nao é alfanumerico e adiciona na string
+    else if (/\W/.test(pattern[i]))
+      output.splice(i, 0, pattern[i]) && patternUnmasked.splice(i, 0, pattern[i])
   return output.join("")
 }
 
