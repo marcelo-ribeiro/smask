@@ -1,6 +1,6 @@
 {
-  "name": "smask",
   "version": "1.0.2",
+  "name": "smask",
   "description": "Vanilla JS Mask",
   "main": "./src/smask.js",
   "directories": {
