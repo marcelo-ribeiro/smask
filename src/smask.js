@@ -1,25 +1,23 @@
-const DIGIT = "d", ALPHA = "a", ALPHA_NUM = "w"
+const tokens = {
+  "d": {test: v => /\d/.test(v)},
+  "a": {test: v => /[a-z]/i.test(v), transform: v => v.toLowerCase()},
+  "A": {test: v => /[a-z]/i.test(v), transform: v => v.toUpperCase()},
+  "w": {test: v => /\w/.test(v)}
+}
 
 /**
- * @param {string} value
- * @param {string} pattern
+ * @param {string} [value=""]
+ * @param {string} [pattern=""]
  * @returns {string}
  */
-export const mask = (value, pattern) => {
-  if (!value) return ""
-  if (!pattern) throw new ReferenceError("")
-  const patternUnmasked = [...unmask(pattern)],
-    output = [...unmask(value, pattern)]
-  for (let i = 0; i < pattern.length && output[i]; i++)
-    // remove o caracter digitado caso nao seja o esperado
-    if (
-      (patternUnmasked[i] === DIGIT && /\D/.test(output[i])) ||
-      (patternUnmasked[i] === ALPHA && !/[a-z]/i.test(output[i])) ||
-      (patternUnmasked[i] === ALPHA_NUM && /\W/i.test(output[i]))
-    ) output.splice(i, 1)
-    // testa se o caracter esperado nao é alfanumerico e adiciona na string
-    else if (/\W/.test(pattern[i]))
-      output.splice(i, 0, pattern[i]) && patternUnmasked.splice(i, 0, pattern[i])
+export const mask = (value = "", pattern = "") => {
+  if (!value || !pattern) return ""
+  const unmasked = [...unmask(pattern)], output = [...unmask(value, pattern)]
+  for (let i = 0, {test, transform} = tokens[unmasked[i]]; i < pattern.length && output[i]; i++)
+    if (test(output[i])) {
+      /\W/.test(pattern[i]) && output.splice(i, 0, pattern[i]) && unmasked.splice(i, 0, pattern[i])
+      output.splice(i, 1, transform ? transform(output[i]) : output[i])
+    } else output.splice(i, 1)
   return output.join("")
 }
 
