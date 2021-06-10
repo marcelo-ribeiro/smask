@@ -16,7 +16,7 @@ export const mask = (value = "", pattern = "") => {
   const unmasked = [...unmask(pattern)], output = [...unmask(value, pattern)]
   for (let i = 0; i < pattern.length && output[i]; i++)
     if (!tokens[unmasked[i]].test(output[i])) output.splice(i, 1)
-    else if(/\W/.test(pattern[i]))
+    else if (/\W/.test(pattern[i]))
       output.splice(i, 0, pattern[i]) && unmasked.splice(i, 0, pattern[i])
     else output.splice(i, 1, tokens[unmasked[i]].transform?.(output[i]) || output[i])
   return output.join("")
