@@ -1,8 +1,9 @@
 const tokens = {
-  "d": {test: v => /\d/.test(v)},
-  "a": {test: v => /[a-z]/i.test(v), transform: v => v.toLowerCase()},
-  "A": {test: v => /[a-z]/i.test(v), transform: v => v.toUpperCase()},
-  "w": {test: v => /\w/.test(v)}
+  d: {test: v => /\d/.test(v)},
+  a: {test: v => /[a-z]/i.test(v), transform: v => v.toLowerCase()},
+  A: {test: v => /[a-z]/i.test(v), transform: v => v.toUpperCase()},
+  w: {test: v => /\w/.test(v), transform: v => v.toLowerCase()},
+  W: {test: v => /\w/.test(v), transform: v => v.toUpperCase()}
 }
 
 /**
@@ -13,13 +14,11 @@ const tokens = {
 export const mask = (value = "", pattern = "") => {
   if (!value || !pattern) return ""
   const unmasked = [...unmask(pattern)], output = [...unmask(value, pattern)]
-  for (let i = 0; i < pattern.length && output[i]; i++) {
-    const {test, transform} = tokens[unmasked[i]]
-    if (test(output[i])) {
-      /\W/.test(pattern[i]) && output.splice(i, 0, pattern[i]) && unmasked.splice(i, 0, pattern[i])
-      output.splice(i, 1, transform ? transform(output[i]) : output[i]);
-    } else output.splice(i, 1)
-  }
+  for (let i = 0; i < pattern.length && output[i]; i++)
+    if (!tokens[unmasked[i]].test(output[i])) output.splice(i, 1)
+    else if(/\W/.test(pattern[i]))
+      output.splice(i, 0, pattern[i]) && unmasked.splice(i, 0, pattern[i])
+    else output.splice(i, 1, tokens[unmasked[i]].transform?.(output[i]) || output[i])
   return output.join("")
 }
 
