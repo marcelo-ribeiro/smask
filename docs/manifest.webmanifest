@@ -4,6 +4,8 @@
     "description": "Vanilla JS Mask.",
     "start_url": ".",
     "display": "standalone",
+    "theme_color": "#ffffff",
+    "background_color": "#14161f",
     "icons": [
         {
             "src": "./android-chrome-192x192.png",
@@ -15,8 +17,5 @@
             "sizes": "512x512",
             "type": "image/png"
         }
-    ],
-    "theme_color": "#ffffff",
-    "background_color": "#14161f",
-    "display": "standalone"
+    ]
 }
