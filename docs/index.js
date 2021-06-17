@@ -17,8 +17,8 @@ console.log("Number: ", numberFormat);
 const currencyFormat = currency("1234.56");
 console.log("Currency: ", currencyFormat);
 
-maskInput(document.getElementById("cpf"), "ddd.ddd.ddd-dd");
-maskInput(document.getElementById("price"), "currency");
+maskInput(document.getElementById("cpf"), ["ddd.ddd.ddd-dd", "dd.ddd.ddd/dddd-dd"]);
+// maskInput(document.getElementById("price"), ["currency"]);
 
 // Setting price placeholder
 document.getElementById("price").setAttribute("placeholder", currency("0", "pt-BR"));

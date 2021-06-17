@@ -6,15 +6,17 @@ const tokens = {
   W: {test: v => /\w/.test(v), transform: v => v.toUpperCase()}
 }
 
+const map = new WeakMap();
+
 /**
- * @param {string} [value=""]
- * @param {string} [pattern=""]
+ * @param {string|string[]} value
+ * @param {string} pattern
  * @returns {string}
  */
-export const mask = (value = "", pattern = "") => {
+export const mask = (value, pattern) => {
   if (!value || !pattern) return ""
-  const unmasked = [...unmask(pattern)], output = [...unmask(value, pattern)]
-  for (let i = 0; i < pattern.length && output[i]; i++)
+  const output = [...unmask(value, pattern)], unmasked = [...unmask(pattern)]
+  for (let i = 0, l = pattern.length; i < l && output[i]; i++)
     !tokens[unmasked[i]].test(output[i])
       ? output.splice(i, 1)
       : /\W/.test(pattern[i])
@@ -89,20 +91,31 @@ const setInputValue = (funcName, element, pattern) =>
 
 /**
  * @param {HTMLInputElement} element
- * @param {string} pattern decimal|currency
+ * @param {string[]} patterns decimal|currency
  */
-export const maskInput = (element, pattern) => {
-  pattern = pattern || element.dataset.mask
-  if (!pattern) throw ReferenceError("Missing second parameter pattern.")
-  let type = pattern;
-  if (!["decimal", "currency"].includes(pattern)) {
-    element.minLength = element.maxLength = pattern.length
-    element.pattern = `.{${pattern.length},${pattern.length}}`
+export const maskInput = (element, patterns) => {
+  if (!Array.isArray(patterns)) throw ReferenceError("Pattern is not array")
+  if (!patterns) throw ReferenceError("Missing second parameter pattern.")
+
+  const [firstPattern, secondPattern] = patterns
+  let type = firstPattern,
+    listener = () => setInputValue(type, element, firstPattern)
+
+  if (!["decimal", "currency"].includes(firstPattern)) {
+    element.minLength = firstPattern.length
+    element.maxLength = secondPattern?.length || element.minLength
+    element.pattern = `.{${firstPattern.length},${secondPattern?.length || firstPattern.length}}`
     type = "mask"
+    if (secondPattern) {
+      patterns.sort((a, b) => a.length - b.length)
+      listener = () => {
+        const pattern = element.value.length <= firstPattern.length ? firstPattern : secondPattern
+        setInputValue(type, element, pattern)
+      }
+    }
   }
-  const listener = () => setInputValue(type, element, pattern)
-  element.addEventListener("input", listener)
   element.value && listener()
+  element.addEventListener("input", listener)
 }
 
 /**
@@ -110,6 +123,6 @@ export const maskInput = (element, pattern) => {
  */
 export const loadInputs = () => {
   document.querySelectorAll("[data-mask]")
-    .forEach(element => maskInput(element, element.dataset.mask))
+    .forEach(element => maskInput(element, eval(element.dataset.mask)))
 }
 loadInputs()

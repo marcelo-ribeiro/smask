@@ -1,5 +1,8 @@
 @keyframes keyboard {
   0% {
+    opacity: 1;
+  }
+  50% {
     opacity: 0;
   }
   100% {
@@ -15,18 +18,19 @@
     font-size: 2.5rem;
     font-weight: 700;
     color: mediumseagreen;
+    letter-spacing: -0.05em;
 
-    &:after {
-      content: "|";
-      margin-left: 0.05em;
-      font-weight: 400;
-      will-change: opacity;
-      animation-name: keyboard;
-      animation-duration: 0.3s;
-      animation-direction: alternate;
-      animation-iteration-count: infinite;
-      animation-timing-function: ease-in-out;
-    }
+    //&:after {
+    //  content: "|";
+    //  margin-left: 0.05em;
+    //  font-weight: 400;
+    //  will-change: opacity;
+    //  animation-name: keyboard;
+    //  animation-duration: 1s;
+    //  animation-direction: alternate;
+    //  animation-iteration-count: infinite;
+    //  animation-timing-function: ease-in-out;
+    //}
   }
   h2 {
     font-style: italic;
@@ -51,7 +55,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
   grid-gap: 1.5rem;
 
   &:not(:last-child) {
