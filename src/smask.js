@@ -90,29 +90,29 @@ const setInputValue = (funcName, element, pattern) =>
   element.value = eval(funcName)(element.value, pattern)
 
 /**
- * @param {HTMLInputElement} element
- * @param {string[]} patterns decimal|currency
+ * maskInput
+ * @param {string|HTMLInputElement} element Element Selector
+ * @param {string|string[]} patterns decimal|currency
  */
 export const maskInput = (element, patterns) => {
   if (!Array.isArray(patterns)) throw ReferenceError("Pattern is not array")
   if (!patterns) throw ReferenceError("Missing second parameter pattern.")
 
+  typeof element === "string" && (element = document.querySelector(element))
   const [firstPattern, secondPattern] = patterns
   let type = firstPattern,
     listener = () => setInputValue(type, element, firstPattern)
 
   if (!["decimal", "currency"].includes(firstPattern)) {
+    patterns.sort((a, b) => a.length - b.length)
     element.minLength = firstPattern.length
     element.maxLength = secondPattern?.length || element.minLength
     element.pattern = `.{${firstPattern.length},${secondPattern?.length || firstPattern.length}}`
     type = "mask"
-    if (secondPattern) {
-      patterns.sort((a, b) => a.length - b.length)
-      listener = () => {
-        const pattern = element.value.length <= firstPattern.length ? firstPattern : secondPattern
-        setInputValue(type, element, pattern)
-      }
-    }
+    secondPattern && (listener = () => {
+      const pattern = element.value.length <= firstPattern.length ? firstPattern : secondPattern
+      setInputValue(type, element, pattern)
+    })
   }
   element.value && listener()
   element.addEventListener("input", listener)
@@ -122,7 +122,8 @@ export const maskInput = (element, patterns) => {
  * Mask all inputs what have data-mask attribute
  */
 export const loadInputs = () => {
+  const datasetToObject = value => JSON.parse(value.replace(/'/g, "\""))
   document.querySelectorAll("[data-mask]")
-    .forEach(element => maskInput(element, eval(element.dataset.mask)))
+    .forEach(el => maskInput(el, datasetToObject(el.dataset.mask)))
 }
 loadInputs()
