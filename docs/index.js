@@ -21,4 +21,4 @@ maskInput("#cpf", ["ddd.ddd.ddd-dd", "dd.ddd.ddd/dddd-dd"])
 maskInput("#price", ["currency"])
 
 // Setting price placeholder
-document.getElementById("price").setAttribute("placeholder", currency("0"))
+document.getElementById("price").setAttribute("placeholder", currency(0))

@@ -7,7 +7,7 @@ const tokens = {
 }
 
 /**
- * @param {string|string[]} value
+ * @param {string} value
  * @param {string} pattern
  * @returns {string}
  */
