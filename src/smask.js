@@ -45,7 +45,7 @@ export const unmask = (value, pattern) => {
  */
 export const numberFormat = (
   value,
-  style ,
+  style,
   {...options} = {style},
   locale,
 ) => {
@@ -65,11 +65,19 @@ export const numberFormat = (
 export const currency = (
   value,
   style = "currency",
-  {...options} = {style, currency: "BRL"},
+  {...options} = {style},
   locale
 ) => {
+  options.currency = currencyToLocale.get(locale || "pt-BR")
   return numberFormat(value, style, options)
 }
+
+/* To be updated based on need - French - Canada and US locale handled  */
+export const currencyToLocale = new Map([
+  ["en-US", "USD"],
+  ["pt-BR", "BRL"],
+  ["fr-CA", "CAD"]
+])
 
 /**
  * @param {string} value
@@ -114,10 +122,8 @@ export const maskInput = (element, patterns) => {
       element.pattern = `.{${pattern.length},${dynamicPattern?.length || pattern.length}}`
       const setInputValue = (element, pattern) => element.value = mask(element.value, pattern)
       listener = () => setInputValue(element, pattern)
-      if (dynamicPattern) listener = () => {
-        const pattern = element.value.length <= pattern.length ? pattern : dynamicPattern
-        setInputValue(element, pattern)
-      }
+      if (dynamicPattern) listener = () =>
+        setInputValue(element, element.value.length <= pattern.length ? pattern : dynamicPattern)
   }
   element.value && listener()
   element.addEventListener("input", listener)
