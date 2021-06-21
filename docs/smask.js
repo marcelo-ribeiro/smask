@@ -121,9 +121,9 @@ export const maskInput = (element, patterns) => {
       element.maxLength = dynamicPattern?.length || element.minLength
       element.pattern = `.{${pattern.length},${dynamicPattern?.length || pattern.length}}`
       const setInputValue = (element, pattern) => element.value = mask(element.value, pattern)
-      listener = () => setInputValue(element, pattern)
-      if (dynamicPattern) listener = () =>
-        setInputValue(element, element.value.length <= pattern.length ? pattern : dynamicPattern)
+      listener = dynamicPattern
+        ? () => setInputValue(element, element.value.length <= element.minLength ? pattern : dynamicPattern)
+        : () => setInputValue(element, pattern)
   }
   element.value && listener()
   element.addEventListener("input", listener)
@@ -133,8 +133,8 @@ export const maskInput = (element, patterns) => {
  * Mask all inputs what have data-mask attribute
  */
 export const prepareMaskInputs = () => {
-  const datasetToObject = value => JSON.parse(value.replace(/'/g, "\""))
-  document.querySelectorAll("[data-mask]")
+  const datasetToObject = value => JSON.parse(value.replace(/'/g, "\""));
+  [...document.querySelectorAll("[data-mask]")]
     .forEach(el => maskInput(el, datasetToObject(el.dataset.mask)))
 }
 prepareMaskInputs()
