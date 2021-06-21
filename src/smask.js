@@ -37,31 +37,38 @@ export const unmask = (value, pattern) => {
 }
 
 /**
- * @param {string} value
- * @param {string} [pattern="decimal"]
- * @param {string} [locale="pt-br"]
- * @param {object} [defaults]
- * @param {string} defaults.style="decimal" decimal|currency|percent|unit
+ * @param {number|string} value
+ * @param {string} [style]
+ * @param {string} [locale]
+ * @param {object} [options]
  * @returns {string}
  */
-export const decimal = (value, pattern = "decimal", locale = "pt-br", {style = "decimal", ...options} = {}) => {
-  if (!value) return value
-  return new Intl.NumberFormat(locale, {style, ...options}).format(unmaskNumber(value, pattern))
+export const numberFormat = (
+  value,
+  style ,
+  {...options} = {style},
+  locale,
+) => {
+  if ("currency" === style) options = {currency: "BRL", ...options}
+  return new Intl.NumberFormat(locale, options).format(value)
 }
 
 /**
  * @param {string|int} value
+ * @param {string} [style="currency"]
+ * @param {object} [options]
+ * @param {string} options.style="currency"
+ * @param {string} options.currency="BRL"
  * @param {string} [locale]
- * @param {object} [defaults]
- * @param {string} defaults.style="currency"
- * @param {string} defaults.currency="BRL"
  * @returns {string}
  */
-export const currency = (value, locale, defaults = {
-  style: "currency",
-  currency: "BRL"
-}) => {
-  return decimal(value, "currency", locale, defaults)
+export const currency = (
+  value,
+  style = "currency",
+  {...options} = {style, currency: "BRL"},
+  locale
+) => {
+  return numberFormat(value, style, options)
 }
 
 /**
@@ -82,14 +89,6 @@ export const unmaskNumber = (value, pattern) => {
 }
 
 /**
- * @param {string} funcName
- * @param {HTMLInputElement} element
- * @param {string} pattern
- */
-const setInputValue = (funcName, element, pattern) =>
-  element.value = eval(funcName)(element.value, pattern)
-
-/**
  * maskInput
  * @param {string|HTMLInputElement} element Element Selector
  * @param {string|string[]} patterns decimal|currency
@@ -99,20 +98,26 @@ export const maskInput = (element, patterns) => {
   if (!patterns) throw ReferenceError("Missing second parameter pattern.")
 
   typeof element === "string" && (element = document.querySelector(element))
-  const [firstPattern, secondPattern] = patterns
-  let type = firstPattern,
-    listener = () => setInputValue(type, element, firstPattern)
+  const [pattern, dynamicPattern] = patterns
+  let listener
 
-  if (!["decimal", "currency"].includes(firstPattern)) {
-    patterns.sort((a, b) => a.length - b.length)
-    element.minLength = firstPattern.length
-    element.maxLength = secondPattern?.length || element.minLength
-    element.pattern = `.{${firstPattern.length},${secondPattern?.length || firstPattern.length}}`
-    type = "mask"
-    secondPattern && (listener = () => {
-      const pattern = element.value.length <= firstPattern.length ? firstPattern : secondPattern
-      setInputValue(type, element, pattern)
-    })
+  switch (pattern) {
+    case "decimal":
+    case "currency":
+    case "percent":
+      listener = () => element.value = numberFormat(unmaskNumber(element.value, pattern), pattern)
+      break
+    default:
+      patterns.sort((a, b) => a.length - b.length)
+      element.minLength = pattern.length
+      element.maxLength = dynamicPattern?.length || element.minLength
+      element.pattern = `.{${pattern.length},${dynamicPattern?.length || pattern.length}}`
+      const setInputValue = (element, pattern) => element.value = mask(element.value, pattern)
+      listener = () => setInputValue(element, pattern)
+      if (dynamicPattern) listener = () => {
+        const pattern = element.value.length <= pattern.length ? pattern : dynamicPattern
+        setInputValue(element, pattern)
+      }
   }
   element.value && listener()
   element.addEventListener("input", listener)
@@ -121,9 +126,9 @@ export const maskInput = (element, patterns) => {
 /**
  * Mask all inputs what have data-mask attribute
  */
-export const loadInputs = () => {
+export const prepareMaskInputs = () => {
   const datasetToObject = value => JSON.parse(value.replace(/'/g, "\""))
   document.querySelectorAll("[data-mask]")
     .forEach(el => maskInput(el, datasetToObject(el.dataset.mask)))
 }
-loadInputs()
+prepareMaskInputs()
