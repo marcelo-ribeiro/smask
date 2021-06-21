@@ -16,8 +16,7 @@
 
   h1 {
     font-size: 2.5rem;
-    font-weight: 700;
-    color: mediumseagreen;
+    color: var(--color-secondary);
     letter-spacing: -0.05em;
 
     //&:after {
@@ -31,9 +30,6 @@
     //  animation-iteration-count: infinite;
     //  animation-timing-function: ease-in-out;
     //}
-  }
-  h2 {
-    font-style: italic;
   }
 }
 

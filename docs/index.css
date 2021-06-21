@@ -3,9 +3,10 @@
   --color-primary-hue: 230;
   --color-primary: hsl(var(--color-primary-hue), 100%, 75%);
   --color-primary-hsl: var(--color-primary-hue), 100%, 75%;
+  --color-secondary: mediumseagreen;
   --text-color: #fffc;
   --background: hsl(var(--color-primary-hue), 20%, 10%);
-  --button-background: mediumseagreen;
+  --button-background: var(--color-secondary);
   --button-foreground: #000e;
 }
 
@@ -92,12 +93,8 @@ button {
 }
 .app-header h1 {
   font-size: 2.5rem;
-  font-weight: 700;
-  color: mediumseagreen;
+  color: var(--color-secondary);
   letter-spacing: -0.05em;
-}
-.app-header h2 {
-  font-style: italic;
 }
 
 .buttons {

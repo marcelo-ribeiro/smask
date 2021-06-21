@@ -2,6 +2,9 @@
   "version": "1.0.9",
   "name": "smask",
   "description": "Vanilla JS Mask",
+  "keywords": ["javascript", "js", "mask", "input", "input mask"],
+  "author": "Marcelo Ribeiro<contato@marceloribeiro.dev>",
+  "homepage": "https://marcelo-ribeiro.github.io/smask",
   "main": "./src/smask.js",
   "directories": {
     "doc": "docs"
@@ -15,11 +18,8 @@
     "type": "git",
     "url": "git+https://github.com/marcelo-ribeiro/smask.git"
   },
-  "keywords": ["javascript", "mask"],
-  "author": "Marcelo Ribeiro",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/marcelo-ribeiro/smask/issues"
   },
-  "homepage": "https://github.com/marcelo-ribeiro/smask#readme"
+  "license": "MIT"
 }

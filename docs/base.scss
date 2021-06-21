@@ -3,9 +3,10 @@
   --color-primary-hue: 230;
   --color-primary: hsl(var(--color-primary-hue), 100%, 75%);
   --color-primary-hsl: var(--color-primary-hue), 100%, 75%;
+  --color-secondary: mediumseagreen;
   --text-color: #fffc;
   --background: hsl(var(--color-primary-hue), 20%, 10%);
-  --button-background: mediumseagreen;
+  --button-background: var(--color-secondary);
   --button-foreground: #000e;
 }
 
