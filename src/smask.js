@@ -6,8 +6,6 @@ const tokens = {
   W: {test: v => /\w/.test(v), transform: v => v.toUpperCase()}
 }
 
-const map = new WeakMap();
-
 /**
  * @param {string|string[]} value
  * @param {string} pattern
