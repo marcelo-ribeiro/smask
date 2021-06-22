@@ -44,10 +44,10 @@ export const unmask = (value, pattern) => {
 export const numberFormat = (
   value,
   style,
-  {...options} = {style},
-  locale,
+  {...options} = {},
+  locale
 ) => {
-  if ("currency" === style) options = {currency: "BRL", ...options}
+  options = {...options, ...getOptions(locale || "pt-BR")[style]};
   return new Intl.NumberFormat(locale, options).format(value)
 }
 
@@ -55,19 +55,16 @@ export const numberFormat = (
  * @param {string|int} value
  * @param {string} [style="currency"]
  * @param {object} [options]
- * @param {string} options.style="currency"
- * @param {string} options.currency="BRL"
  * @param {string} [locale]
  * @returns {string}
  */
 export const currency = (
   value,
   style = "currency",
-  {...options} = {style},
-  locale
+  {...options} = {},
+  locale,
 ) => {
-  options.currency = currencyToLocale.get(locale || "pt-BR")
-  return numberFormat(value, style, options)
+  return numberFormat(parseFloat(value), style, options)
 }
 
 /* To be updated based on need - French - Canada and US locale handled  */
@@ -77,13 +74,22 @@ export const currencyToLocale = new Map([
   ["fr-CA", "CAD"]
 ])
 
+const getOptions = locale => ({
+  currency: {
+    style: "currency",
+    currency: currencyToLocale.get(locale)
+  },
+  decimal: {},
+  percent: {}
+})
+
 /**
  * @param {string} value
  * @param {string} pattern
  * @returns {string|int}
  */
 export const unmaskNumber = (value, pattern) => {
-  if (!value || !pattern) return value
+  if (!value || !pattern) return 0
   let output = value.replace(/\D/g, "")
   if (pattern === "currency" && output > 0) {
     output = [...output]
@@ -91,7 +97,7 @@ export const unmaskNumber = (value, pattern) => {
     output.splice(-2, 0, ".")
     output = output.join("")
   }
-  return parseFloat(output)
+  return parseFloat(output || 0)
 }
 
 /**
