@@ -1,11 +1,11 @@
 {
-  "version": "1.0.13",
+  "version": "1.0.14",
   "name": "smask",
   "description": "Vanilla JS Mask",
   "keywords": ["javascript", "js", "mask", "input", "input mask"],
   "author": "Marcelo Ribeiro<contato@marceloribeiro.dev>",
   "homepage": "https://marcelo-ribeiro.github.io/smask",
-  "main": "./src/smask.js",
+  "main": "src/smask.js",
   "directories": {
     "doc": "docs"
   },

@@ -135,4 +135,3 @@ export const prepareMaskInputs = () => {
   [...document.querySelectorAll("[data-mask]")]
     .forEach(el => maskInput(el, datasetToObject(el.dataset.mask)))
 }
-prepareMaskInputs()

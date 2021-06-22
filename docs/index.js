@@ -1,4 +1,4 @@
-import {currency, numberFormat, mask, maskInput, unmask} from "./smask.js"
+import {currency, numberFormat, mask, maskInput, unmask, prepareMaskInputs} from "./smask.js"
 
 const cpf = mask("12345678909", "ddd.ddd.ddd-dd")
 console.log("CPF: ", cpf)
@@ -22,3 +22,5 @@ maskInput("#price", ["currency"])
 
 // Setting price placeholder
 document.getElementById("price").setAttribute("placeholder", currency(0))
+
+prepareMaskInputs()
