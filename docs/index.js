@@ -1,4 +1,4 @@
-import {currency, numberFormat, mask, maskInput, unmask, prepareMaskInputs} from "./smask.js"
+import {mask, maskInput, unmask, prepareMaskInputs, currency, numberFormat} from "./smask.js"
 
 const cpf = mask("12345678909", "ddd.ddd.ddd-dd")
 console.log("CPF: ", cpf)
