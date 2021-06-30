@@ -1,21 +1,25 @@
-import {mask, maskInput, unmask, prepareMaskInputs, currency, numberFormat} from "./smask.js"
+import {
+  mask,
+  maskInput,
+  unmask,
+  prepareMaskInputs,
+  currency,
+  numberFormat,
+  reverseCurrencyFormat,
+  reverseNumberFormat
+} from "./smask.js"
 
-const cpf = mask("12345678909", "ddd.ddd.ddd-dd")
-console.log("CPF: ", cpf)
-const phone = mask("71987654321", "(dd) ddddd-dddd")
-console.log("Cell phone: ", phone)
-const card = mask("1234567812345678", "dddd dddd dddd dddd")
-console.log("Credit card: ", card)
-const date = mask("12345678", "dd/dd/dddd")
-console.log("Date: ", date)
-const postalCode = mask("12345678", "ddddd-ddd")
-console.log("Postal Code: ", postalCode)
-const postalCodeUnmasked = unmask("12345-678", "ddddd-ddd")
-console.log("Postal Code (unmasked): ", postalCodeUnmasked)
-const decimal = numberFormat(123456)
-console.log("Number: ", decimal)
-const currencyFormat = currency(1234.56)
-console.log("Currency: ", currencyFormat)
+console.log("CPF: ", mask("12345678909", "ddd.ddd.ddd-dd"))
+console.log("Cell phone: ", mask("71987654321", "(dd) ddddd-dddd"))
+console.log("Credit card: ", mask("1234567812345678", "dddd dddd dddd dddd"))
+console.log("Date: ", mask("12345678", "dd/dd/dddd"))
+console.log("Postal Code: ", mask("12345678", "ddddd-ddd"))
+console.log("Postal Code (unmasked): ", unmask("12345-678", "ddddd-ddd"))
+
+console.log("Decimal: ", numberFormat(1234.56))
+console.log("Decimal (unmasked): ", reverseNumberFormat("1.234,00"))
+console.log("Currency: ", currency(1234.56))
+console.log("Currency (unmasked): ", reverseCurrencyFormat("R$ 1.234,56", "pt-BR", "BRL"))
 
 maskInput("#cpf", ["ddd.ddd.ddd-dd", "dd.ddd.ddd/dddd-dd"])
 maskInput("#price", ["currency"])

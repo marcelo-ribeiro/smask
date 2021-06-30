@@ -13,5 +13,5 @@ export const currency = (
   {...options} = {},
   locale,
 ) => {
-  return numberFormat(parseFloat(value), style, options)
+  return numberFormat(parseFloat(value), style, options, locale)
 }
