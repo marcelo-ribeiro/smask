@@ -9,19 +9,43 @@ export const unmaskNumber = (value, pattern) => {
   return output || 0
 }
 
+/**
+ * Reverse Number Format
+ * @param {string} value
+ * @param {string} locale
+ * @returns {number}
+ */
 export const reverseNumberFormat = (value, locale) => {
-  const parts = new Intl.NumberFormat(locale).formatToParts(1111.1);
-  const group = parts.find(part => part.type === 'group').value;
-  const decimal = parts.find(part => part.type === 'decimal').value;
-  let reversedVal = value
-    .replace(new RegExp('\\' + group, 'g'), '')
-    .replace(new RegExp('\\' + decimal, 'g'), '.');
-  return Number.isNaN(reversedVal) ? 0 : +reversedVal;
+  const parts = new Intl.NumberFormat(locale).formatToParts(1111.1)
+  return reverseFormat(value, parts)
 }
 
+/**
+ * Reverse Currency Format
+ * @param {string} value
+ * @param {string} locale
+ * @param {string} currency
+ * @returns {number}
+ */
 export const reverseCurrencyFormat = (value, locale, currency) => {
-  const parts = new Intl.NumberFormat(locale, {style: "currency", currency}).formatToParts(0);
-  const currencySymbol = parts.find(part => part.type === 'currency').value
-  let reversedVal = value.replace(currencySymbol, '')
-  return Number.isNaN(reversedVal) ? 0 : reverseNumberFormat(reversedVal, locale);
+  const parts = new Intl.NumberFormat(locale, {style: "currency", currency}).formatToParts(1111.1)
+  const symbol = parts.find(part => part.type === 'currency').value
+  const reversedVal = value.replace(symbol, '')
+  return reverseFormat(reversedVal, parts)
+}
+
+/**
+ * @param {string} value
+ * @param {array} parts
+ * @returns {number|number}
+ */
+const reverseFormat = (value, parts) => {
+  const group = parts.find(part => part.type === 'group').value
+  const decimal = parts.find(part => part.type === 'decimal').value
+  let reversedVal = value
+    .replaceAll(group, '')
+    .replace(decimal, '.')
+  return Number.isNaN(reversedVal)
+    ? NaN
+    : +reversedVal
 }

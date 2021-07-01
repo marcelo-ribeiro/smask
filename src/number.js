@@ -5,7 +5,7 @@
  * @param {object} [options]
  * @returns {string}
  */
-export const numberFormat = (
+export const number = (
   value,
   style,
   {...options} = {},

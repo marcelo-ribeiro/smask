@@ -1,4 +1,4 @@
-import {numberFormat} from "./numberFormat.js";
+import {number} from "./number.js";
 
 /**
  * @param {string|int} value
@@ -13,5 +13,5 @@ export const currency = (
   {...options} = {},
   locale,
 ) => {
-  return numberFormat(parseFloat(value), style, options, locale)
+  return number(parseFloat(value), style, options, locale)
 }

@@ -1,14 +1,14 @@
 import {mask} from "./mask.js";
 import {unmaskNumber} from "./unmaskNumber.js"
 import {currency} from "./currency.js";
-import {getDateMask} from "./date.js";
+import {dateMask} from "./date.js";
 
 /**
  * maskInput
  * @param {string|HTMLInputElement} element Element Selector
  * @param {string|string[]} patterns decimal|currency
  */
-export const maskInput = (element, patterns) => {
+export const input = (element, patterns) => {
   if (!Array.isArray(patterns)) throw ReferenceError("Pattern is not array")
   if (!patterns) throw ReferenceError("Missing second parameter pattern.")
 
@@ -21,7 +21,11 @@ export const maskInput = (element, patterns) => {
       listener = () => element.value = currency(unmaskNumber(element.value, pattern), pattern)
       break
     default:
-      if (pattern === "date") pattern = getDateMask()
+      if (pattern === "date") {
+        const {mask, placeholder} = dateMask()
+        element.placeholder = placeholder
+        pattern = mask
+      }
 
       patterns.sort((a, b) => a.length - b.length)
       element.minLength = pattern.length
