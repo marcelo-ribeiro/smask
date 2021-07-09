@@ -1,7 +1,7 @@
 import {mask} from "./mask.js";
 import {unmaskNumber} from "./unmaskNumber.js"
 import {currency} from "./currency.js";
-import {dateMask} from "./date.js";
+import {getDatePattern, maskDate} from "./date.js";
 
 /**
  * maskInput
@@ -17,24 +17,29 @@ export const input = (element, patterns) => {
   let listener
 
   switch (pattern) {
-    case "currency":
+    case "currency": {
       listener = () => element.value = currency(unmaskNumber(element.value, pattern), pattern)
       break
-    default:
-      if (pattern === "date") {
-        const {mask, placeholder} = dateMask()
-        element.placeholder = placeholder
-        pattern = mask
-      }
-
+    }
+    case "date": {
+      const {mask, placeholder} = getDatePattern()
+      element.placeholder = placeholder
+      listener = () => element.value = maskDate(element.value, mask)
+      break
+    }
+    default: {
       patterns.sort((a, b) => a.length - b.length)
       element.minLength = pattern.length
       element.maxLength = dynamicPattern?.length || element.minLength
       element.pattern = `.{${pattern.length},${dynamicPattern?.length || pattern.length}}`
 
       listener = dynamicPattern
-        ? () => element.value = mask(element.value, element.value.length <= element.minLength ? pattern : dynamicPattern)
+        ? () => element.value = mask(
+          element.value,
+          element.value.length <= element.minLength ? pattern : dynamicPattern
+        )
         : () => element.value = mask(element.value, pattern)
+    }
   }
   element.value && listener()
   element.addEventListener("input", listener)

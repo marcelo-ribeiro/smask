@@ -1,15 +1,32 @@
+import {mask} from "./mask.js"
+
+const getComputedDate = (value) => {
+  const initialDate = "01/01/1970".replace(/\D/g, "")
+  value = value.replace(/\D/g, "")
+  return value + initialDate.slice(value.length)
+}
+
+export const maskDate = (value, pattern) => {
+  const computedDate = getComputedDate(value)
+  const dateMasked = mask(computedDate, pattern)
+  const dateObject = date(dateMasked)
+  return mask(isNaN(dateObject.valueOf()) ? value.slice(0, -1) : value, pattern)
+}
+
 /**
  * Get Mask Date Intl
  * @returns {object}
  */
-export const dateMask = () => {
-  const parts = new Intl.DateTimeFormat().formatToParts(new Date("1-1-1990"));
+export const getDatePattern = () => {
+  const parts = new Intl.DateTimeFormat().formatToParts(new Date("1-1-1970"))
   let mask = "", placeholder = ""
-  parts.forEach(part => {
-    if (part.type === "month") (mask += "dd") && (placeholder += "mm")
-    else if (part.type === "day") (mask += "dd") && (placeholder += "dd")
-    else if (part.type === "year") (mask += "dddd") && (placeholder += "yyyy")
-    else if (part.type === "literal") (mask += part.value) && (placeholder += part.value)
+  parts.forEach(({type, value}) => {
+    new Map([
+      ["month", () => (mask += "dd") && (placeholder += "__")],
+      ["day", () => (mask += "dd") && (placeholder += "__")],
+      ["year", () => (mask += "dddd") && (placeholder += "____")],
+      ["literal", () => (mask += value) && (placeholder += value)]
+    ]).get(type)()
   })
   return {mask, placeholder}
 }
@@ -30,4 +47,3 @@ export const date = (value, locale = undefined) => {
     dateFormat = `${month}/${day}/${year}`
   return new Date(dateFormat)
 }
-console.log(date("11/12/1983"))

@@ -22,7 +22,7 @@ export default {
   devServer: {
     contentBase: path.join(__dirname, 'docs'),
     publicPath: '/docs/',
-    port: 8080,
+    port: 8000,
     watchContentBase: true,
     compress: true,
     liveReload: false,
