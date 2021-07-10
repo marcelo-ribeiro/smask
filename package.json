@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "1.1.4",
+  "version": "1.1.6",
   "name": "smask",
   "description": "Vanilla JS Mask",
   "keywords": [

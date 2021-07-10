@@ -24,6 +24,8 @@ export const input = (element, patterns) => {
     case "date": {
       const {mask, placeholder} = getDatePattern()
       element.placeholder = placeholder
+      element.minLength = element.maxLength = pattern.length
+      element.pattern = `.{${pattern.length},${pattern.length}}`
       listener = () => element.value = maskDate(element.value, mask)
       break
     }
