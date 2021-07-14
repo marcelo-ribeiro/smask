@@ -8,6 +8,8 @@
   <title>Smask - Vanilla JS Mask</title>
 
   <link rel="stylesheet" href="index.css">
+
+  <!--Google Fonts-->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
@@ -34,19 +36,27 @@
         <div class="field--text">
           <input class="field--text__input" id="cpf" name="cpf" type="tel" inputmode="numeric"
                  placeholder="000.000.000-00" required>
-          <label class="field--text__label" for="cpf">Brazil CPF / CNPJ</label>
+          <label class="field--text__label" for="cpf">Brazil CPF</label>
+        </div>
+
+        <div class="field--text">
+          <input class="field--text__input" id="cpfcnpj" name="cpfcnpj" type="tel" inputmode="numeric"
+                 placeholder="Digite aqui..."
+                 data-mask="['ddd.ddd.ddd-dd', 'dd.ddd.ddd/dddd-dd']"
+                 required>
+          <label class="field--text__label" for="cpfcnpj">Brazil CPF or CNPJ</label>
         </div>
 
         <div class="field--text">
           <input class="field--text__input" id="tel" name="tel" type="tel" inputmode="numeric" autocomplete="tel"
                  placeholder="(00) 00000-0000"
-                 data-mask="['(dd) dddd-dddd', '(dd) ddddd-dddd']" required>
-          <label class="field--text__label" for="tel">Cell Phone</label>
+                 data-mask="['(dd) ddddd-dddd']" required>
+          <label class="field--text__label" for="tel">Brazil Cell Phone</label>
         </div>
 
         <div class="field--text">
           <input class="field--text__input" id="date" name="date" type="tel" inputmode="numeric"
-                 placeholder="00/00/0000" data-mask="['date']" required>
+                 placeholder="__/__/____" data-mask="['date']" required>
           <label class="field--text__label" for="date">Birthdate</label>
         </div>
 
@@ -86,24 +96,27 @@
 <script type="module">
   import smask from "./smask.js"
 
+  // Custom mask
   console.log("CPF: ", smask.mask("12345678909", "ddd.ddd.ddd-dd"))
   console.log("Cell phone: ", smask.mask("71987654321", "(dd) ddddd-dddd"))
   console.log("Credit card: ", smask.mask("1234567812345678", "dddd dddd dddd dddd"))
-  console.log("Date: ", smask.mask("12345678", "dd/dd/dddd"))
   console.log("Postal Code: ", smask.mask("12345678", "ddddd-ddd"))
   console.log("Postal Code (unmasked): ", smask.unmask("12345-678", "ddddd-ddd"))
 
+  // Number and Currency
   console.log("Decimal: ", smask.number(1234.56))
   console.log("Decimal (unmasked): ", smask.reverseNumberFormat("1.234,56"))
   console.log("Currency: ", smask.currency(6543.21))
   console.log("Currency (unmasked): ", smask.reverseCurrencyFormat("R$ 6.543,21", "pt-BR", "BRL"))
 
-  smask.input("#cpf", ["ddd.ddd.ddd-dd", "dd.ddd.ddd/dddd-dd"])
-  smask.input("#price", ["currency"])
+  // Load input mask via js
+  smask.input("#cpf", ["ddd.ddd.ddd-dd"])
+  smask.input(document.getElementById("price"), ["currency"])
 
   // Setting price placeholder
   document.getElementById("price").setAttribute("placeholder", smask.currency(0))
 
+  // Initialize mask on inputs that have data-mask attribute
   smask.prepareMaskInputs()
 </script>
 </body>
