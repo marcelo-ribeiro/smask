@@ -1,4 +1,5 @@
 import { mask } from "./mask.js";
+import { elements } from "./input.js";
 
 const dateParts = (locale) => new Intl.DateTimeFormat(locale).formatToParts();
 const initialDate = "01/01/1970".replace(/\D/g, "");
@@ -10,18 +11,20 @@ const getComputedDate = (value) => {
 
 /**
  * Get Date Masked
- * @param {string} value
+ * @param {HTMLInputElement} element
  * @param {string} pattern
  * @param {string} [locale=undefined]
  * @returns {string}
  */
-export const maskDate = (value, pattern, locale = undefined) => {
+export const maskDate = (element, pattern, locale = undefined) => {
   const dateObject = date(
-    getMaskedDate(getComputedDate(value), pattern),
+    getMaskedDate(getComputedDate(element.value), pattern),
     locale
   );
   return mask(
-    isNaN(dateObject.valueOf()) ? value.slice(0, -1) : value,
+    isNaN(dateObject.valueOf())
+      ? elements.get(element).oldValue
+      : element.value,
     pattern
   );
 };
