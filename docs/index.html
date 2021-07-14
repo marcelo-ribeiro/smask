@@ -1,123 +1,228 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Smask - Vanilla JS Mask</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Smask - Vanilla JS Mask</title>
 
-  <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.css" />
 
-  <!--Google Fonts-->
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
-  <link rel="manifest" href="./manifest.webmanifest">
-</head>
-<body onload="document.body.classList.add('loaded')">
-<header class="app-header">
-  <h1><strong>smask</strong></h1>
-  <h2><strong>Vanilla JS Mask</strong></h2>
-</header>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicon-16x16.png"
+    />
+    <link rel="manifest" href="./manifest.webmanifest" />
+  </head>
 
-<main>
-  <section>
-    <header>
-      <h3>Examples:</h3>
+  <body onload="document.body.classList.add('loaded')">
+    <header class="app-header">
+      <h1><strong>smask</strong></h1>
+      <h2><strong>Vanilla JS Mask</strong></h2>
     </header>
 
-    <form onsubmit="return false">
-      <div class="grid">
-        <div class="field--text">
-          <input class="field--text__input" id="cpf" name="cpf" type="tel" inputmode="numeric"
-                 placeholder="000.000.000-00" required>
-          <label class="field--text__label" for="cpf">Brazil CPF</label>
-        </div>
+    <main>
+      <section>
+        <header>
+          <h3>Examples:</h3>
+        </header>
 
-        <div class="field--text">
-          <input class="field--text__input" id="cpfcnpj" name="cpfcnpj" type="tel" inputmode="numeric"
-                 placeholder="Digite aqui..."
-                 data-mask="['ddd.ddd.ddd-dd', 'dd.ddd.ddd/dddd-dd']"
-                 required>
-          <label class="field--text__label" for="cpfcnpj">Brazil CPF or CNPJ</label>
-        </div>
+        <form onsubmit="return false">
+          <div class="grid">
+            <div class="field--text">
+              <input
+                class="field--text__input"
+                id="cpf"
+                name="cpf"
+                type="tel"
+                inputmode="numeric"
+                placeholder="000.000.000-00"
+                required
+              />
+              <label class="field--text__label" for="cpf">Brazil CPF</label>
+            </div>
 
-        <div class="field--text">
-          <input class="field--text__input" id="tel" name="tel" type="tel" inputmode="numeric" autocomplete="tel"
-                 placeholder="(00) 00000-0000"
-                 data-mask="['(dd) ddddd-dddd']" required>
-          <label class="field--text__label" for="tel">Brazil Cell Phone</label>
-        </div>
+            <div class="field--text">
+              <input
+                class="field--text__input"
+                id="cpfcnpj"
+                name="cpfcnpj"
+                type="tel"
+                inputmode="numeric"
+                placeholder="Digite aqui..."
+                data-mask="['ddd.ddd.ddd-dd', 'dd.ddd.ddd/dddd-dd']"
+                required
+              />
+              <label class="field--text__label" for="cpfcnpj"
+                >Brazil CPF or CNPJ</label
+              >
+            </div>
 
-        <div class="field--text">
-          <input class="field--text__input" id="date" name="date" type="tel" inputmode="numeric"
-                 placeholder="__/__/____" data-mask="['date']" required>
-          <label class="field--text__label" for="date">Birthdate</label>
-        </div>
+            <div class="field--text">
+              <input
+                class="field--text__input"
+                id="tel"
+                name="tel"
+                type="tel"
+                inputmode="numeric"
+                autocomplete="tel"
+                placeholder="(00) 00000-0000"
+                data-mask="['(dd) ddddd-dddd']"
+                required
+              />
+              <label class="field--text__label" for="tel"
+                >Brazil Cell Phone</label
+              >
+            </div>
 
-        <div class="field--text">
-          <input class="field--text__input" id="card-expiry" name="cc-exp" type="tel" inputmode="numeric"
-                 placeholder="__/____" data-mask="['dd/dddd']" autocomplete="cc-exp" required>
-          <label class="field--text__label" for="card-expiry">Card Expiry</label>
-        </div>
+            <div class="field--text">
+              <input
+                class="field--text__input"
+                id="date"
+                name="date"
+                type="tel"
+                inputmode="numeric"
+                placeholder="__/__/____"
+                data-mask="['date']"
+                required
+              />
+              <label class="field--text__label" for="date">Birthdate</label>
+            </div>
 
-        <div class="field--text">
-          <input class="field--text__input" id="car-plate" name="car-plate" type="text" placeholder="AAA0A00"
-                 data-mask="['AAAdAdd']" required>
-          <label class="field--text__label" for="car-plate">Br Car Plate</label>
-        </div>
+            <div class="field--text">
+              <input
+                class="field--text__input"
+                id="card-expiry"
+                name="cc-exp"
+                type="tel"
+                inputmode="numeric"
+                placeholder="__/____"
+                data-mask="['dd/dddd']"
+                autocomplete="cc-exp"
+                required
+              />
+              <label class="field--text__label" for="card-expiry"
+                >Card Expiry</label
+              >
+            </div>
 
-        <div class="field--text">
-          <input class="field--text__input" id="custom" name="custom" type="text" placeholder="???" data-mask="['wWw']"
-                 required>
-          <label class="field--text__label" for="custom">Alphanumeric</label>
-        </div>
+            <div class="field--text">
+              <input
+                class="field--text__input"
+                id="car-plate"
+                name="car-plate"
+                type="text"
+                placeholder="AAA0A00"
+                data-mask="['AAAdAdd']"
+                required
+              />
+              <label class="field--text__label" for="car-plate"
+                >Br Car Plate</label
+              >
+            </div>
 
-        <div class="field--text">
-          <input class="field--text__input" id="price" name="price" type="tel" inputmode="numeric"
-                 required>
-          <label class="field--text__label" for="price">Price</label>
-        </div>
-      </div>
+            <div class="field--text">
+              <input
+                class="field--text__input"
+                id="custom"
+                name="custom"
+                type="text"
+                placeholder="???"
+                data-mask="['wWw']"
+                required
+              />
+              <label class="field--text__label" for="custom"
+                >Alphanumeric</label
+              >
+            </div>
 
-      <footer class="buttons">
-        <button type="submit" style="width: 100%;">Submit</button>
-      </footer>
-    </form>
-  </section>
-</main>
+            <div class="field--text">
+              <input
+                class="field--text__input"
+                id="price"
+                name="price"
+                type="tel"
+                inputmode="numeric"
+                required
+              />
+              <label class="field--text__label" for="price">Price</label>
+            </div>
+          </div>
 
-<script type="module" src="./smask.js"></script>
-<script type="module">
-  import smask from "./smask.js"
+          <footer class="buttons">
+            <button type="submit" style="width: 100%">Submit</button>
+          </footer>
+        </form>
+      </section>
+    </main>
 
-  // Custom mask
-  console.log("CPF: ", smask.mask("12345678909", "ddd.ddd.ddd-dd"))
-  console.log("Cell phone: ", smask.mask("71987654321", "(dd) ddddd-dddd"))
-  console.log("Credit card: ", smask.mask("1234567812345678", "dddd dddd dddd dddd"))
-  console.log("Postal Code: ", smask.mask("12345678", "ddddd-ddd"))
-  console.log("Postal Code (unmasked): ", smask.unmask("12345-678", "ddddd-ddd"))
+    <script type="module" src="./smask.js"></script>
+    <script type="module">
+      import smask from "./smask.js";
 
-  // Number and Currency
-  console.log("Decimal: ", smask.number(1234.56))
-  console.log("Decimal (unmasked): ", smask.reverseNumberFormat("1.234,56"))
-  console.log("Currency: ", smask.currency(6543.21))
-  console.log("Currency (unmasked): ", smask.reverseCurrencyFormat("R$ 6.543,21", "pt-BR", "BRL"))
+      // Custom mask
+      console.log("CPF: ", smask.mask("12345678909", "ddd.ddd.ddd-dd"));
+      console.log("Cell phone: ", smask.mask("71987654321", "(dd) ddddd-dddd"));
+      console.log(
+        "Credit card: ",
+        smask.mask("1234567812345678", "dddd dddd dddd dddd")
+      );
+      console.log("Postal Code: ", smask.mask("12345678", "ddddd-ddd"));
+      console.log(
+        "Postal Code (unmasked): ",
+        smask.unmask("12345-678", "ddddd-ddd")
+      );
 
-  // Load input mask via js
-  smask.input("#cpf", ["ddd.ddd.ddd-dd"])
-  smask.input(document.getElementById("price"), ["currency"])
+      // Number and Currency
+      console.log("Decimal: ", smask.number(1234.56));
+      console.log(
+        "Decimal (unmasked): ",
+        smask.reverseNumberFormat("1.234,56")
+      );
+      console.log("Currency: ", smask.currency(6543.21));
+      console.log(
+        "Currency (unmasked): ",
+        smask.reverseCurrencyFormat("R$ 6.543,21", "pt-BR", "BRL")
+      );
 
-  // Setting price placeholder
-  document.getElementById("price").setAttribute("placeholder", smask.currency(0))
+      // Load input mask via js
+      smask.input("#cpf", ["ddd.ddd.ddd-dd"]);
+      smask.input(document.getElementById("price"), ["currency"]);
 
-  // Initialize mask on inputs that have data-mask attribute
-  smask.prepareMaskInputs()
-</script>
-</body>
+      // Setting price placeholder
+      document
+        .getElementById("price")
+        .setAttribute("placeholder", smask.currency(0));
+
+      // Initialize mask on inputs that have data-mask attribute
+      smask.prepareMaskInputs();
+    </script>
+  </body>
 </html>
