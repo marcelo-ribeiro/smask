@@ -23,8 +23,5 @@ console.log(
 smask.input("#cpf", ["ddd.ddd.ddd-dd"]);
 smask.input(document.getElementById("price"), ["currency"]);
 
-// Setting price placeholder
-document.getElementById("price").setAttribute("placeholder", smask.currency(0));
-
 // Initialize mask on inputs that have data-mask attribute
 smask.prepareMaskInputs();

@@ -30,6 +30,7 @@ export const input = (element, patterns) => {
   // Initialize input listener by mask
   switch (pattern) {
     case "currency": {
+      el.placeholder = currency(0);
       listener = () =>
         (el.value = currency(unmaskNumber(el.value, pattern), pattern));
       break;
