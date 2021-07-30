@@ -26,7 +26,6 @@ export const input = (element, patterns) => {
   if (patterns.length > 1) patterns.sort((a, b) => a.length - b.length);
   let [pattern, dynamicPattern] = patterns;
   let listener = () => {};
-  console.log(dynamicPattern);
 
   // Initialize input listener by mask
   switch (pattern) {
@@ -57,7 +56,6 @@ export const input = (element, patterns) => {
       }}`;
       listener = dynamicPattern
         ? () => {
-            console.log({ el, value: el.value });
             el.value = mask(
               el.value,
               el.value.length <= pattern.length ? pattern : dynamicPattern
