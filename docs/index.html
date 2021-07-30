@@ -80,9 +80,9 @@
                 data-mask="['ddd.ddd.ddd-dd', 'dd.ddd.ddd/dddd-dd']"
                 required
               />
-              <label class="field--text__label" for="cpfcnpj"
-                >Brazil CPF or CNPJ</label
-              >
+              <label class="field--text__label" for="cpfcnpj">
+                Brazil CPF or CNPJ
+              </label>
             </div>
 
             <div class="field--text">
@@ -97,9 +97,9 @@
                 data-mask="['(dd) ddddd-dddd']"
                 required
               />
-              <label class="field--text__label" for="tel"
-                >Brazil Cell Phone</label
-              >
+              <label class="field--text__label" for="tel">
+                Brazil Cell Phone
+              </label>
             </div>
 
             <div class="field--text">
@@ -128,9 +128,9 @@
                 autocomplete="cc-exp"
                 required
               />
-              <label class="field--text__label" for="card-expiry"
-                >Card Expiry</label
-              >
+              <label class="field--text__label" for="card-expiry">
+                Card Expiry
+              </label>
             </div>
 
             <div class="field--text">
@@ -143,9 +143,9 @@
                 data-mask="['AAAdAdd']"
                 required
               />
-              <label class="field--text__label" for="car-plate"
-                >Br Car Plate</label
-              >
+              <label class="field--text__label" for="car-plate">
+                Br Car Plate
+              </label>
             </div>
 
             <div class="field--text">
@@ -158,9 +158,9 @@
                 data-mask="['wWw']"
                 required
               />
-              <label class="field--text__label" for="custom"
-                >Alphanumeric</label
-              >
+              <label class="field--text__label" for="custom">
+                Alphanumeric
+              </label>
             </div>
 
             <div class="field--text">
@@ -184,45 +184,6 @@
     </main>
 
     <script type="module" src="./smask.js"></script>
-    <script type="module">
-      import smask from "./smask.js";
-
-      // Custom mask
-      console.log("CPF: ", smask.mask("12345678909", "ddd.ddd.ddd-dd"));
-      console.log("Cell phone: ", smask.mask("71987654321", "(dd) ddddd-dddd"));
-      console.log(
-        "Credit card: ",
-        smask.mask("1234567812345678", "dddd dddd dddd dddd")
-      );
-      console.log("Postal Code: ", smask.mask("12345678", "ddddd-ddd"));
-      console.log(
-        "Postal Code (unmasked): ",
-        smask.unmask("12345-678", "ddddd-ddd")
-      );
-
-      // Number and Currency
-      console.log("Decimal: ", smask.number(1234.56));
-      console.log(
-        "Decimal (unmasked): ",
-        smask.reverseNumberFormat("1.234,56")
-      );
-      console.log("Currency: ", smask.currency(6543.21));
-      console.log(
-        "Currency (unmasked): ",
-        smask.reverseCurrencyFormat("R$ 6.543,21", "pt-BR", "BRL")
-      );
-
-      // Load input mask via js
-      smask.input("#cpf", ["ddd.ddd.ddd-dd"]);
-      smask.input(document.getElementById("price"), ["currency"]);
-
-      // Setting price placeholder
-      document
-        .getElementById("price")
-        .setAttribute("placeholder", smask.currency(0));
-
-      // Initialize mask on inputs that have data-mask attribute
-      smask.prepareMaskInputs();
-    </script>
+    <script type="module" src="./index.js"></script>
   </body>
 </html>

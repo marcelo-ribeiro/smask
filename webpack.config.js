@@ -1,39 +1,46 @@
-import path from "path"
-const __dirname = path.resolve(path.dirname(''))
-import CopyPlugin from "copy-webpack-plugin";
-// import HtmlWebpackPlugin from "html-webpack-plugin"
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default {
-  target: 'web',
+  target: "web",
   mode: "development",
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
     filename: "smask.js",
-    path: path.resolve(__dirname, "docs"),
+    path: path.resolve(__dirname, "dist"),
     library: {
-      type: "module"
+      type: "module",
     },
-    // clean: true
+    clean: true,
   },
   experiments: {
     outputModule: true,
   },
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
   devServer: {
-    contentBase: path.join(__dirname, 'docs'),
-    publicPath: '/docs/',
+    contentBase: [
+      path.resolve(__dirname, "docs"),
+      path.resolve(__dirname, "dist"),
+    ],
+    publicPath: "/dist/",
     port: 8000,
     watchContentBase: true,
     compress: true,
-    liveReload: false,
-    hot: true,
-    hotOnly: true,
+    liveReload: true,
+    // hot: true,
+    // hotOnly: true,
+    // writeToDisk: true,
   },
-  plugins: [
-    new CopyPlugin({
-      patterns: [
-        { from: path.resolve(__dirname, "docs", "smask.js"), to: path.resolve(__dirname, "dist") }
-      ],
-    }),
-  ]
-}
+  // plugins: [
+  //   new CopyPlugin({
+  //     patterns: [
+  //       {
+  //         from: path.resolve(__dirname, "dist", "smask.js"),
+  //         to: path.resolve(__dirname, "docs"),
+  //       },
+  //     ],
+  //   }),
+  // ],
+};

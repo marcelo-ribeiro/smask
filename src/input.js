@@ -4,10 +4,10 @@ import { currency } from "./currency.js";
 import { getDatePattern, maskDate } from "./date.js";
 
 export const elements = new Map();
-const setElements = (element, obj = {}) =>
+const setElements = (element, options = {}) =>
   elements.set(element, {
     ...elements.get(element),
-    ...obj,
+    ...options,
   });
 
 /**
@@ -16,52 +16,56 @@ const setElements = (element, obj = {}) =>
  * @param {string|string[]} patterns decimal|currency
  */
 export const input = (element, patterns) => {
-  if (!Array.isArray(patterns)) throw ReferenceError("Pattern is not array");
+  if (!Array.isArray(patterns)) throw ReferenceError("Pattern is not an array");
   if (!patterns) throw ReferenceError("Missing second parameter pattern.");
 
-  if (typeof element === "string") element = document.querySelector(element);
-  elements.set(element, {});
+  const el =
+    typeof element === "object" ? element : document.querySelector(element);
+  if (!el) throw Error("Element not found.");
+  elements.set(el, {});
+  if (patterns.length > 1) patterns.sort((a, b) => a.length - b.length);
   let [pattern, dynamicPattern] = patterns;
   let listener = () => {};
+  console.log(dynamicPattern);
 
   // Initialize input listener by mask
   switch (pattern) {
     case "currency": {
       listener = () =>
-        (element.value = currency(
-          unmaskNumber(element.value, pattern),
-          pattern
-        ));
+        (el.value = currency(unmaskNumber(el.value, pattern), pattern));
       break;
     }
     case "date": {
       const pattern = getDatePattern();
-      element.minLength = element.maxLength = pattern.length;
-      element.pattern = `.{${pattern.length},${pattern.length}}`;
+      el.minLength =
+        el.maxLength =
+        el.minlength =
+        el.maxlength =
+          pattern.length;
+      el.pattern = `.{${pattern.length},${pattern.length}}`;
       listener = () => {
-        element.value = maskDate(element, pattern);
-        setElements(element, { oldValue: element.value });
+        el.value = maskDate(el, pattern);
+        setElements(el, { oldValue: el.value });
       };
       break;
     }
     default: {
-      patterns.sort((a, b) => a.length - b.length);
-      element.minLength = pattern.length;
-      element.maxLength = dynamicPattern?.length || element.minLength;
-      element.pattern = `.{${pattern.length},${
+      el.minLength = el.minlength = pattern.length;
+      el.maxLength = el.maxlength = dynamicPattern?.length || pattern.length;
+      el.pattern = `.{${pattern.length},${
         dynamicPattern?.length || pattern.length
       }}`;
       listener = dynamicPattern
-        ? () =>
-            (element.value = mask(
-              element.value,
-              element.value.length <= element.minLength
-                ? pattern
-                : dynamicPattern
-            ))
-        : () => (element.value = mask(element.value, pattern));
+        ? () => {
+            console.log({ el, value: el.value });
+            el.value = mask(
+              el.value,
+              el.value.length <= pattern.length ? pattern : dynamicPattern
+            );
+          }
+        : () => (el.value = mask(el.value, pattern));
     }
   }
-  element.value && listener();
-  element.addEventListener("input", listener);
+  el.value && listener();
+  el.addEventListener("input", listener);
 };

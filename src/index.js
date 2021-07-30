@@ -23,3 +23,5 @@ export default {
   reverseNumberFormat,
   reverseCurrencyFormat,
 };
+
+// import.meta.webpackHot.accept();
