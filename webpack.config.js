@@ -30,17 +30,15 @@ export default {
     compress: true,
     liveReload: true,
     // hot: true,
-    // hotOnly: true,
-    // writeToDisk: true,
   },
-  // plugins: [
-  //   new CopyPlugin({
-  //     patterns: [
-  //       {
-  //         from: path.resolve(__dirname, "dist", "smask.js"),
-  //         to: path.resolve(__dirname, "docs"),
-  //       },
-  //     ],
-  //   }),
-  // ],
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "dist", "smask.js"),
+          to: path.resolve(__dirname, "docs"),
+        },
+      ],
+    }),
+  ],
 };
