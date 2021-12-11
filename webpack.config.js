@@ -1,5 +1,6 @@
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
+import CopyPlugin from "copy-webpack-plugin";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

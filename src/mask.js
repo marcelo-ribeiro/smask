@@ -7,14 +7,27 @@ import { unmask } from "./unmask.js";
  * @returns {string}
  */
 export const mask = (value, pattern) => {
-  if (!value || !pattern) return "";
-  const output = [...unmask(value, pattern)],
-    unmasked = [...unmask(pattern)];
-  for (let i = 0, l = pattern.length; i < l && output[i]; i++)
-    !tokens[unmasked[i]].test(output[i])
-      ? output.splice(i, 1)
-      : /\W/.test(pattern[i])
-      ? output.splice(i, 0, pattern[i]) && unmasked.splice(i, 0, pattern[i])
-      : output.splice(i, 1, tokens[unmasked[i]].transform(output[i]));
-  return output.join("");
+  if (!value || !pattern) return value;
+
+  let output = "";
+
+  for (
+    let input = unmask(value, pattern),
+      unmasked = unmask(pattern),
+      i = 0,
+      ii = 0,
+      pl = pattern.length;
+    i < pl && input[ii];
+    i++
+  ) {
+    const token = tokens[unmasked[ii]],
+      patternChar = pattern[i],
+      inputChar = input[ii];
+
+    if (!token.test(inputChar)) break;
+    else if (/\W/.test(patternChar)) output += patternChar;
+    else (output += token.transform(inputChar)), ii++;
+  }
+
+  return output;
 };
