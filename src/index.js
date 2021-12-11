@@ -11,7 +11,7 @@ import { date } from "./date.js";
 import { number } from "./number.js";
 import { currency } from "./currency.js";
 
-export default {
+export {
   mask,
   unmask,
   input,
