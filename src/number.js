@@ -1,12 +1,18 @@
 /**
  * @param {number|string} value
- * @param {string} [style]
- * @param {string} [locale]
+ * @param {string} [style=decimal]
+ * @param {string} [locale=pt-BR]
  * @param {object} [options]
  * @returns {string}
  */
-export const number = (value, style, { ...options } = {}, locale) => {
-  options = { ...options, ...getOptions(locale || "pt-BR")[style] };
+export const number = (
+  value,
+  style = "decimal",
+  { ...options } = {},
+  locale = "pt-BR"
+) => {
+  const defaultOptions = getOptions(locale)[style];
+  options = { ...options, ...defaultOptions };
   return new Intl.NumberFormat(locale, options).format(value);
 };
 
