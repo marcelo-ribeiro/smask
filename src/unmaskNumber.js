@@ -1,4 +1,6 @@
 /**
+ * Remove non-numeric characters from a string
+ * and if pattern equals currency, divide by 100
  * @param {string} value
  * @param {string} [pattern=undefined]
  * @returns {string|int}
