@@ -1,4 +1,4 @@
 # **sMask**
 **A Vanilla JS Mask**
 
-> Documentation under development.
+> Documentation and tests in development.
