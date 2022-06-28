@@ -34,7 +34,10 @@ export const input = (
       element.placeholder = currency(0);
       listener = () => {
         const unmaskedNumber = unmaskNumber(element.value);
-        element.value = currency(unmaskedNumber);
+        element.value =
+          unmaskedNumber === 0 || isNaN(unmaskedNumber)
+            ? ""
+            : currency(unmaskedNumber);
       };
       break;
     }
