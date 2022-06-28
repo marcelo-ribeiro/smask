@@ -33,8 +33,8 @@ export const input = (
     case "currency": {
       element.placeholder = currency(0);
       listener = () => {
-        const unmaskedNumber = unmaskNumber(element.value, pattern);
-        element.value = currency(unmaskedNumber, pattern);
+        const unmaskedNumber = unmaskNumber(element.value);
+        element.value = currency(unmaskedNumber);
       };
       break;
     }

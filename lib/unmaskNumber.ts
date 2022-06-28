@@ -1,42 +1,44 @@
+import { currencyLocale } from "./currency/currency-map";
+
 /**
  * Remove non-numeric characters from a string
  * and if pattern equals currency, divide by 100
  */
-export const unmaskNumber = (value: string, pattern: string): number => {
+export const unmaskNumber = (value: string): number => {
   const digits = value.replace(/\D/g, "");
   let output = 0;
-  if (digits && pattern === "currency") output = parseFloat(digits) / 100;
+  output = parseFloat(digits) / 100;
   return output;
 };
 
 /**
  * Reverse Number Format
  */
-export const reverseNumberFormat = (
-  value: string,
-  locales: string | string[] | undefined = undefined
-): number => {
-  const parts = new Intl.NumberFormat(locales).formatToParts(1111.1);
+export const numberUnformat = (value: string, locale?: string): number => {
+  const parts = new Intl.NumberFormat(locale).formatToParts(1111.1);
   return reverseFormat(value, parts);
 };
 
 /**
  * Reverse Currency Format
  */
-export const reverseCurrencyFormat = (
+export const currencyUnformat = (
   value: string,
-  locales?: string | string[] | undefined,
-  currency?: string
+  locale: string = navigator.language,
+  currency: Intl.NumberFormatOptions["currency"] = currencyLocale[
+    locale.slice(-2)
+  ]
 ): number => {
-  const parts = new Intl.NumberFormat(locales, {
+  const parts = new Intl.NumberFormat(locale, {
     style: "currency",
     currency,
   }).formatToParts(1111.1);
   const currencySymbol = parts.find((part) => part.type === "currency")?.value;
-  const reversedValue = currencySymbol
+  const reversedValue = !!currencySymbol
     ? value.replace(currencySymbol, "")
     : value;
-  return reverseFormat(reversedValue, parts);
+  const output = reverseFormat(reversedValue, parts);
+  return output;
 };
 
 /**

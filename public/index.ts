@@ -1,4 +1,4 @@
-import * as smask from "../lib/main";
+import smask from "../lib/main";
 
 // Custom mask
 console.log("CPF: ", smask.mask("12345678909", ["ddd.ddd.ddd-dd"]));
@@ -11,15 +11,15 @@ console.log("Postal Code: ", smask.mask("12345678", ["ddddd-ddd"]));
 console.log("Postal Code (unmasked): ", smask.unmask("12345-678", "ddddd-ddd"));
 
 // Number and Currency
-console.log("Decimal: ", smask.number(1234.56));
+console.log("Number: ", smask.number(1234.56));
 console.log(
-  "Decimal (unmasked): ",
-  smask.reverseNumberFormat("1.234,56", "pt-BR")
+  "Number (unformatted): ",
+  smask.numberUnformat("1.234,56", "pt-BR")
 );
 console.log("Currency: ", smask.currency(6543.21));
 console.log(
-  "Currency (unmasked): ",
-  smask.reverseCurrencyFormat("R$ 6.543,21", "pt-BR", "BRL")
+  "Currency (unformatted): ",
+  smask.currencyUnformat("R$ 6.543,21", "pt-BR", "BRL")
 );
 
 // Load input mask via js

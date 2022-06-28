@@ -2,12 +2,10 @@ import { tokens } from "./tokens";
 import { unmask } from "./unmask";
 
 export const mask = (value: string, patterns: string[]): string => {
-  if (!value || !patterns) {
-    throw ReferenceError("Value or pattern not found.");
-  }
-  if (!Array.isArray(patterns)) {
+  if (!value) return "";
+  if (!patterns) throw ReferenceError("Value or pattern not found.");
+  if (!Array.isArray(patterns))
     throw ReferenceError("Pattern should be an array");
-  }
 
   const [pattern, dynamicPattern] = patterns.sort(
     (a, b) => a.length - b.length

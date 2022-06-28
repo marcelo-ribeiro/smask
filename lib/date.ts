@@ -21,12 +21,12 @@ const isValidDate = (date: Date): boolean => {
 };
 
 /**
- * Get Date Masked
+ * Get date masked
  */
 export const maskDate = (
   element: HTMLInputElement,
   pattern: string,
-  locale?: string
+  locale: string = navigator.language
 ): string => {
   const computedDate = getComputedDate(element.value);
   const maskedDate = mask(computedDate, [pattern]);
@@ -38,7 +38,7 @@ export const maskDate = (
 };
 
 /**
- * Get Date Pattern
+ * Get locale date pattern
  */
 export const getDatePattern = (locale?: string): string => {
   let pattern = "";
@@ -52,7 +52,7 @@ export const getDatePattern = (locale?: string): string => {
 };
 
 /**
- * Convert string to locale date
+ * Convert locale string to Date object
  */
 export const toDate = (date: string, locale?: string): Date => {
   const dateArray = date.split("/");
