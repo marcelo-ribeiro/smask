@@ -46,7 +46,7 @@ smask.number(1234.56);
 smask.number(1234.56, "en-US");
 // "1,234.56"
 ```
-#### Get unmasked number by passing locale and current currency code
+#### Get unmasked number by passing locale
 ```
 smask.numberUnformat("1,234.56", "en-US");
 // "1234.56"
@@ -69,7 +69,7 @@ smask.currency(1234.56, "en-US");
 smask.currency(1234.56, "en-US", "USD");
 // "$1,234.56"
 ```
-#### Get unformatted currency from current locale and currency code
+#### Get unformatted currency by passing locale and currency code
 ```
 smask.currencyUnformat("$1,234.56", "en-US", "USD");
 // 1234.56
