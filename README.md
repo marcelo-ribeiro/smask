@@ -1,8 +1,5 @@
 # **sMask**
 ## A Vanilla JS Mask
-<br/>
-
-> Documentation and tests in development.
 
 <br/>
 
