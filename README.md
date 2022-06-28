@@ -78,27 +78,27 @@ smask.input(document.getElementById("phone"), ["ddd"]);
 ```
 ### Letters
 ```
-smask.input(document.getElementById("phone"), ["aaa"]);
+smask.input(document.getElementById("letters"), ["aaa"]);
 ```
 ### Letters Uppercase
 ```
-smask.input(document.getElementById("phone"), ["AAA"]);
+smask.input(document.getElementById("lettersUpper"), ["AAA"]);
 ```
 ### Alphanumeric
 ```
-smask.input(document.getElementById("phone"), ["www"]);
+smask.input(document.getElementById("alphanum"), ["www"]);
 ```
 ### Alphanumeric Uppercase
 ```
-smask.input(document.getElementById("phone"), ["WWW"]);
+smask.input(document.getElementById("alphanumUpper"), ["WWW"]);
 ```
 ### Date
 ```
-smask.input(document.getElementById("phone"), ["date"]);
+smask.input(document.getElementById("date"), ["date"]);
 ```
 ### Price
 ```
-smask.input(document.getElementById("phone"), ["price"]);
+smask.input(document.getElementById("price"), ["price"]);
 ```
 
 ### Single pattern
@@ -108,5 +108,5 @@ smask.input(document.getElementById("phone"), ["(dd) ddddd-dddd"]);
 
 ### Multiple patterns
 ```
-smask.input(document.getElementById("phone"), ["(dd) dddd-dddd", "(dd) ddddd-dddd"]);
+smask.input(document.getElementById("phoneOrCellphone"), ["(dd) dddd-dddd", "(dd) ddddd-dddd"]);
 ```
