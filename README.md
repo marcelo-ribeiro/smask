@@ -39,14 +39,14 @@ smask.unmask("123.456", "ddd.ddd");
 #### Get masked number from current locale
 ```
 smask.number(1234.56);
-// "1,234.56"
+// "1,234.56" if in US English locale
 ```
-#### Get masked number from passed locale
+#### Get masked number by passing locale
 ```
 smask.number(1234.56, "en-US");
 // "1,234.56"
 ```
-#### Get unmasked number from current locale
+#### Get unmasked number by passing locale and current currency code
 ```
 smask.numberUnformat("1,234.56", "en-US");
 // "1234.56"
@@ -57,9 +57,14 @@ smask.numberUnformat("1,234.56", "en-US");
 #### Get masked currency from current locale and currency code
 ```
 smask.currency(1234.56);
+// "$1,234.56" if in US English locale
+```
+#### Get masked currency by passing locale and current currency code
+```
+smask.currency(1234.56, "en-US");
 // "$1,234.56"
 ```
-#### Get masked currency from passed locale and currency code
+#### Get masked currency by passing the locale and currency code.
 ```
 smask.currency(1234.56, "en-US", "USD");
 // "$1,234.56"
