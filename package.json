@@ -1,6 +1,6 @@
 {
   "name": "smask",
-  "version": "2.0.5",
+  "version": "2.1.0",
   "description": "Vanilla JS Mask",
   "keywords": [
     "javascript",
@@ -22,18 +22,19 @@
   },
   "license": "MIT",
   "files": [
-    "dist/smask.es.js",
-    "dist/smask.umd.js",
-    "lib"
+    "dist",
+    "lib",
+    "types"
   ],
-  "main": "./lib/main.ts",
-  "module": "./lib/main.ts",
+  "main": "./dist/smask.umd.js",
+  "module": "./dist/smask.es.js",
   "exports": {
     ".": {
-      "import": "./lib/main.ts",
-      "require": "./dist/smask.es.js"
+      "import": "./dist/smask.es.js",
+      "require": "./dist/smask.umd.js"
     }
   },
+  "types": "./types/index.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
