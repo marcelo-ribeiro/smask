@@ -1,6 +1,6 @@
 {
   "name": "smask",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Vanilla JS Mask",
   "keywords": [
     "javascript",
@@ -22,7 +22,8 @@
   },
   "license": "MIT",
   "files": [
-    "dist",
+    "dist/smask.es.js",
+    "dist/smask.umd.js",
     "types"
   ],
   "main": "./dist/smask.umd.js",
