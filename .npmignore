@@ -5,6 +5,8 @@
 /tmp/
 .idea/*
 /docs/
+/lib/
+/dist/
 
 coverage
 *.log
@@ -19,6 +21,5 @@ package-lock.json
 /public/
 .gitignore
 .editorconfig
-/dist/*
 !/dist/smask.es.js
 !/dist/smask.umd.js
