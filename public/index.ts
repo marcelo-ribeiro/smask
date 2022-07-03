@@ -26,7 +26,9 @@ console.log(
 smask.input(document.getElementById("cpf") as HTMLInputElement, [
   "ddd.ddd.ddd-dd",
 ]);
-smask.input(document.getElementById("price") as HTMLInputElement, ["currency"]);
+smask.input(document.getElementById("currency") as HTMLInputElement, [
+  "currency",
+]);
 
 // Initialize mask on inputs that have data-mask attribute
 smask.prepareMaskInputs();
