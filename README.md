@@ -101,9 +101,9 @@ smask.input(document.getElementById("alphanumUpper"), ["WWW"]);
 ```
 smask.input(document.getElementById("date"), ["date"]);
 ```
-### Price
+### Currency
 ```
-smask.input(document.getElementById("price"), ["price"]);
+smask.input(document.getElementById("currency"), ["currency"]);
 ```
 
 ### Single pattern
