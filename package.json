@@ -23,7 +23,6 @@
   "license": "MIT",
   "files": [
     "dist",
-    "lib",
     "types"
   ],
   "main": "./dist/smask.umd.js",
