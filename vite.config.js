@@ -10,4 +10,7 @@ module.exports = defineConfig({
       fileName: (format) => `smask.${format}.js`,
     },
   },
+  server: {
+    port: 3030,
+  },
 });
