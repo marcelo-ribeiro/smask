@@ -45,6 +45,7 @@ export const input = (
       const pattern = getDatePattern();
       element.minLength = element.maxLength = pattern.length;
       element.pattern = `.{${pattern.length},${pattern.length}}`;
+      setElements(element, { oldValue: element.value });
       listener = () => {
         element.value = maskDate(element, pattern);
         setElements(element, { oldValue: element.value });
