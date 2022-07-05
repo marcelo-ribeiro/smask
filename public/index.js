@@ -23,12 +23,8 @@ console.log(
 );
 
 // Load input mask via js
-smask.input(document.getElementById("cpf") as HTMLInputElement, [
-  "ddd.ddd.ddd-dd",
-]);
-smask.input(document.getElementById("currency") as HTMLInputElement, [
-  "currency",
-]);
+smask.input(document.getElementById("cpf"), ["ddd.ddd.ddd-dd"]);
+smask.input(document.getElementById("currency"), ["currency"]);
 
 // Initialize mask on inputs that have data-mask attribute
 smask.prepareMaskInputs();
