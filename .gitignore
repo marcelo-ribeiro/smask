@@ -8,7 +8,10 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+docs
+dist/*
+!dist/smask.es.js
+!dist/smask.umd.js
 dist-ssr
 *.local
 
