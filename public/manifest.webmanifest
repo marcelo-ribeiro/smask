@@ -1,6 +1,6 @@
 {
   "name": "sMask",
-  "short_name": "sMask",
+  "short_name": "smask",
   "description": "Vanilla JS Mask.",
   "start_url": ".",
   "id": "smask",
