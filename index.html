@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no" />
     <title>sMask - Vanilla JS Mask</title>
 
-    <link rel="stylesheet" href="public/index.css" />
+    <link rel="stylesheet" href="/index.css" />
 
     <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -35,7 +35,7 @@
       sizes="16x16"
       href="public/favicon-16x16.png"
     />
-    <link rel="manifest" href="public/manifest.webmanifest" />
+    <link rel="manifest" href="/manifest.webmanifest" />
   </head>
 
   <body onload="document.body.classList.add('loaded')">
@@ -73,7 +73,6 @@
                 type="tel"
                 inputmode="numeric"
                 placeholder="Digite aqui..."
-                data-mask="['ddd.ddd.ddd-dd', 'dd.ddd.ddd/dddd-dd']"
                 required
               />
               <label class="field--text__label" for="cpfcnpj">
@@ -103,10 +102,9 @@
                 class="field--text__input"
                 id="date"
                 name="date"
-                type="tel"
+                type="text"
                 inputmode="numeric"
                 placeholder="__/__/____"
-                data-mask="['date']"
                 required
               />
               <label class="field--text__label" for="date">Birthdate</label>
@@ -120,7 +118,6 @@
                 type="tel"
                 inputmode="numeric"
                 placeholder="__/____"
-                data-mask="['dd/dddd']"
                 autocomplete="cc-exp"
                 required
               />
@@ -136,7 +133,6 @@
                 name="car-plate"
                 type="text"
                 placeholder="AAA0A00"
-                data-mask="['AAAdAdd']"
                 required
               />
               <label class="field--text__label" for="car-plate">
@@ -147,14 +143,13 @@
             <div class="field--text">
               <input
                 class="field--text__input"
-                id="custom"
-                name="custom"
+                id="alphanumeric"
+                name="alphanumeric"
                 type="text"
                 placeholder="???"
-                data-mask="['wWw']"
                 required
               />
-              <label class="field--text__label" for="custom">
+              <label class="field--text__label" for="alphanumeric">
                 Alphanumeric
               </label>
             </div>
@@ -170,6 +165,19 @@
               />
               <label class="field--text__label" for="currency">Currency</label>
             </div>
+
+            <div class="field--text">
+              <input
+                class="field--text__input"
+                id="number"
+                name="number"
+                type="tel"
+                inputmode="numeric"
+                placeholder="0.0"
+                required
+              />
+              <label class="field--text__label" for="number">Number</label>
+            </div>
           </div>
 
           <footer class="buttons">
@@ -179,6 +187,6 @@
       </section>
     </main>
 
-    <script type="module" src="public/index.js"></script>
+    <script type="module" src="/dist/main.js"></script>
   </body>
 </html>

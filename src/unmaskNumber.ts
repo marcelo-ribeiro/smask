@@ -2,12 +2,11 @@ import { currencyLocale } from "./currency/currency-map";
 
 /**
  * Remove non-numeric characters from a string
- * and if pattern equals currency, divide by 100
  */
 export const unmaskNumber = (value: string): number => {
   const digits = value.replace(/\D/g, "");
   let output = 0;
-  output = parseFloat(digits) / 100;
+  output = parseFloat(digits);
   return output;
 };
 
@@ -33,7 +32,7 @@ export const currencyUnformat = (
     style: "currency",
     currency,
   }).formatToParts(1111.1);
-  const currencySymbol = parts.find((part) => part.type === "currency")?.value;
+  const currencySymbol = parts.find(({ type }) => type === "currency")?.value;
   const reversedValue = !!currencySymbol
     ? value.replace(currencySymbol, "")
     : value;
@@ -50,7 +49,7 @@ const reverseFormat = (
 ): number => {
   const group = parts.find((part) => part.type === "group")?.value;
   const decimal = parts.find((part) => part.type === "decimal")?.value;
-  if (group) value = value.replaceAll(group, "");
+  if (group) value = value.replace(group, "");
   if (decimal) value = value.replace(decimal, ".");
   return Number.isNaN(value) ? NaN : parseFloat(value);
 };

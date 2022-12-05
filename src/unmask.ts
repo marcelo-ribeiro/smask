@@ -1,3 +1,6 @@
+/**
+ * Remove mask pattern
+ */
 export const unmask = (value: string, pattern?: string): string => {
   if (!value) return value;
   value = value.replace(/\W/gi, "");

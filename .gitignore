@@ -9,11 +9,13 @@ lerna-debug.log*
 
 node_modules
 docs
-dist/*
-!dist/smask.es.js
-!dist/smask.umd.js
+dist
+lib
+# !dist/smask.es.js
+# !dist/smask.umd.js
 dist-ssr
 *.local
+package
 
 # Editor directories and files
 .vscode/*
@@ -25,3 +27,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+*.tgz

@@ -1,7 +1,7 @@
 /**
  * Get a locale number
  */
-export const number = (
+export const numberFormat = (
   value: number,
   locale: string = navigator.language,
   style = "decimal",

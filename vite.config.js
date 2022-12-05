@@ -1,13 +1,18 @@
-const path = require("path");
-const { defineConfig } = require("vite");
+// vite.config.js
+// import { resolve } from "path";
+import { defineConfig } from "vite";
 
-module.exports = defineConfig({
+export default defineConfig({
   build: {
+    // emptyOutDir: false,
+    // outDir: "lib",
+    sourcemap: true,
     lib: {
-      entry: path.resolve(__dirname, "lib/index.ts"),
+      entry: "./src/index.ts",
       name: "smask",
-      format: "es",
-      fileName: (format) => `smask.${format}.js`,
+      format: ["es"],
+      // fileName: (format) => `smask.${format}.js`,
+      fileName: "index",
     },
   },
   server: {

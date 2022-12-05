@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2022",
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ES2022", "DOM"],
     "moduleResolution": "Node",
     "strict": true,
     "sourceMap": true,
@@ -20,9 +20,9 @@
     // Added by Marcelo
     "declaration": true,
     "emitDeclarationOnly": true,
-    "declarationDir": "./types",
-    "declarationMap": false,
+    "declarationDir": "./lib",
+    "declarationMap": true
   },
-  "include": ["lib/**/*"],
-  "exclude": ["node_modules"],
+  "files": ["src/index.ts"],
+  "exclude": ["node_modules"]
 }
