@@ -9,7 +9,7 @@ lerna-debug.log*
 
 node_modules
 docs
-dist
+# dist
 lib
 # !dist/smask.es.js
 # !dist/smask.umd.js
