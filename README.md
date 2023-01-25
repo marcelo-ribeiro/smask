@@ -11,7 +11,7 @@ npm i smask
 
 ## Usage
 ```
-import smask from "smask";
+import * as smask from "smask";
 ```
 <br/>
 
