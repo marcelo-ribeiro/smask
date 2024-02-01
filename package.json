@@ -1,6 +1,6 @@
 {
   "name": "smask",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Vanilla JS Mask",
   "keywords": [
     "javascript",
@@ -31,16 +31,19 @@
   "exports": {
     ".": {
       "import": {
+        "types": "./lib/index.d.ts",
         "default": "./lib/index.es.js"
       },
       "require": {
+        "types": "./lib/index.d.ts",
         "default": "./lib/index.umd.js"
       }
     }
   },
   "scripts": {
     "dev": "vite",
-    "build": "npm run clean && vite build && tsc && npm run copy",
+    "build": "vite build",
+    "prepare": "npm run clean && npm run build && tsc && npm run copy",
     "publish": "npm publish",
     "preview": "vite preview",
     "test": "jest --watch",
