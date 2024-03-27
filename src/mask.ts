@@ -35,7 +35,7 @@ export const mask = (value: string, patterns: string[]): string => {
       patternChar = computedPattern[i],
       inputChar = unmaskedValue[ii];
 
-    if (!token.test(inputChar)) break;
+    if (!token?.test(inputChar)) break;
     else if (/\W/.test(patternChar)) output += patternChar;
     else (output += token.transform(inputChar)), ii++;
   }
