@@ -50,9 +50,7 @@ export const input = (
     throw ReferenceError("Pattern should be an array");
   }
 
-  const [pattern, dynamicPattern] = patterns.sort(
-    (a, b) => a.length - b.length
-  );
+  const [pattern] = patterns.sort((a, b) => a.length - b.length);
 
   let listener: () => void;
 
@@ -87,9 +85,9 @@ export const input = (
     }
     default: {
       element.minLength = pattern.length;
-      element.maxLength = dynamicPattern?.length || pattern.length;
+      element.maxLength = patterns.at(-1)?.length || pattern.length;
       element.pattern = `.{${pattern.length},${
-        dynamicPattern?.length || pattern.length
+        patterns.at(-1)?.length || pattern.length
       }}`;
       listener = () => {
         element.value = mask(element.value, patterns);

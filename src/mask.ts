@@ -7,11 +7,18 @@ export const mask = (value: string, patterns: string[]): string => {
   if (!Array.isArray(patterns))
     throw ReferenceError("Pattern should be an array");
 
-  const [pattern, dynamicPattern] = patterns.sort(
-    (a, b) => a.length - b.length
-  );
-  const computedPattern =
-    unmask(value).length <= unmask(pattern).length ? pattern : dynamicPattern;
+  patterns.sort((a, b) => a.length - b.length);
+
+  let computedPattern = "";
+  const valueLength = unmask(value).length;
+
+  for (let i = 0; i < patterns.length; i++) {
+    const pattern = patterns[i];
+    if (valueLength <= unmask(pattern).length) {
+      computedPattern = pattern;
+      break;
+    }
+  }
 
   let output = "";
 
