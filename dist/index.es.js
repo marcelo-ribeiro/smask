@@ -251,7 +251,7 @@ const currencyLocale = {
   ZM: "ZMW",
   ZW: "ZWL"
 };
-const currencyFormat = (value, locale = navigator.language, currency = currencyLocale[locale.slice(-2)]) => {
+const currencyFormat = (value, locale = navigator.language, currency = currencyLocale[locale.slice(-2).toLocaleUpperCase()]) => {
   return numberFormat(value, locale, "currency", { currency });
 };
 const referenceDateDigits = "01/01/1970".replace(/\D/g, "");
@@ -370,8 +370,16 @@ const mask = (value, patterns) => {
     throw ReferenceError("Value or pattern not found.");
   if (!Array.isArray(patterns))
     throw ReferenceError("Pattern should be an array");
-  const [pattern, dynamicPattern] = patterns.sort((a, b) => a.length - b.length);
-  const computedPattern = unmask(value).length <= unmask(pattern).length ? pattern : dynamicPattern;
+  patterns.sort((a, b) => a.length - b.length);
+  let computedPattern = "";
+  const valueLength = unmask(value).length;
+  for (let i = 0; i < patterns.length; i++) {
+    const pattern = patterns[i];
+    if (valueLength <= unmask(pattern).length) {
+      computedPattern = pattern;
+      break;
+    }
+  }
   let output = "";
   for (let unmaskedValue = unmask(value, computedPattern), unmaskedPattern = unmask(computedPattern), patternLength = computedPattern.length, i = 0, ii = 0; i < patternLength && unmaskedValue[ii]; i++) {
     const token = tokens[unmaskedPattern[ii]], patternChar = computedPattern[i], inputChar = unmaskedValue[ii];
@@ -435,6 +443,7 @@ const inputDate = (value, locale = navigator.language) => {
   return mask(value, [pattern]);
 };
 const input = (element, patterns) => {
+  var _a, _b;
   if (!element || typeof element !== "object") {
     throw Error("Element not found.");
   }
@@ -444,7 +453,7 @@ const input = (element, patterns) => {
   if (!Array.isArray(patterns)) {
     throw ReferenceError("Pattern should be an array");
   }
-  const [pattern, dynamicPattern] = patterns.sort((a, b) => a.length - b.length);
+  const [pattern] = patterns.sort((a, b) => a.length - b.length);
   let listener;
   switch (pattern) {
     case "currency": {
@@ -477,8 +486,8 @@ const input = (element, patterns) => {
     }
     default: {
       element.minLength = pattern.length;
-      element.maxLength = (dynamicPattern == null ? void 0 : dynamicPattern.length) || pattern.length;
-      element.pattern = `.{${pattern.length},${(dynamicPattern == null ? void 0 : dynamicPattern.length) || pattern.length}}`;
+      element.maxLength = ((_a = patterns.at(-1)) == null ? void 0 : _a.length) || pattern.length;
+      element.pattern = `.{${pattern.length},${((_b = patterns.at(-1)) == null ? void 0 : _b.length) || pattern.length}}`;
       listener = () => {
         element.value = mask(element.value, patterns);
       };

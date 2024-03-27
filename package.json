@@ -1,6 +1,6 @@
 {
   "name": "smask",
-  "version": "3.0.2",
+  "version": "3.0.4",
   "description": "Vanilla JS Mask",
   "keywords": [
     "javascript",
@@ -43,8 +43,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "prepare": "npm run clean && npm run build && tsc && npm run copy",
-    "publish": "npm publish",
+    "prepare": "yarn clean && yarn build && tsc && yarn copy",
+    "publish": "yarn publish",
     "preview": "vite preview",
     "test": "jest --watch",
     "clean": "rm -rf ./dist && rm -rf ./lib",
